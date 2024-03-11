@@ -1,7 +1,4 @@
-# HR-Module
-the Human Resources module app helps to communicate changes to employment records in Human Resources Records Information System (HRRIS) 
-
-# Tasks
+# 23 Final Project: MERN Stack Single-Page Application
 
 Projects have played a key role in your journey to becoming a full-stack web developer. As you apply for development jobs, your portfolio is absolutely vital to opening doors to opportunities. Your portfolio showcases high-quality deployed examples of your work, and you can use your finished projects for that very purpose.
 
@@ -156,4 +153,4 @@ Fulfilling all three of the following requirements to turn your app into a PWA w
 * The URL of the GitHub repository, with a unique name and a README describing the project.
 
 ---
-© 2024 Project 3 Group 5. Confidential and Proprietary. All Rights Reserved.
+© 2023 edX Boot Camps LLC. Confidential and Proprietary. All Rights Reserved.
