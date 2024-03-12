@@ -1,6 +1,10 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 .DS_Store
 >>>>>>> dc23908b3d4988263bc520b674d988fb908bda0d
+=======
+.DS_Store
+>>>>>>> 75bb471ea0218d27aecbdffe0f6d0b655230d10e
 node_modules
 .env
