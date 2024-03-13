@@ -3,7 +3,7 @@ const sequelize = require('../config/connection');
 const seedUsers = require('./userData');
 const seedDepartments = require('./departmentData');
 const seedRoles = require('./roleData');
-// const seedEmployees = require('./employeeData');
+const seedEmployees = require('./employeeData');
 
 const seedDatabase = async () => {
   await sequelize.sync({ force: true });
@@ -18,8 +18,8 @@ const seedDatabase = async () => {
   await seedRoles();
   console.log('\n----- ROLES SEEDED -----\n');
 
-  // await seedEmployees();
-  // console.log('\n----- EMPLOYEES SEEDED -----\n');
+  await seedEmployees();
+  console.log('\n----- EMPLOYEES SEEDED -----\n');
 
   process.exit(0);
 }
