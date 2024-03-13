@@ -6,8 +6,7 @@ const withAuth = require('../../utils/auth');
 router.get('/', /*withAuth,*/ async (req, res) => {
   try {
     const departmentData = await Department.findAll({
-      include: [{ model: Role, attributes: ['title', 'salary'] }]
-      // include: [{ model: Role, include: [{ model: Employee }] }]
+      include: [{ model: Role, attributes: ['title', 'salary'], include: [{ model: Employee, attributes: ['first_name', 'last_name'] }] }]
     });
     res.status(200).json(departmentData);
   } catch (err) {
@@ -19,7 +18,7 @@ router.get('/', /*withAuth,*/ async (req, res) => {
 router.get('/:id', /*withAuth,*/ async (req, res) => {
   try {
     const departmentData = await Department.findByPk(req.params.id, {
-      // include: [{ model: Role, include: [{ model: Employee }] }]
+      include: [{ model: Role, attributes: ['title', 'salary'], include: [{ model: Employee, attributes: ['first_name', 'last_name'] }] }]
     });
 
     if (!departmentData) {
