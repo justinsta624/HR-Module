@@ -1,41 +1,44 @@
 const { Model, DataTypes } = require("sequelize");
-const sequelize = require("../config/connections");
+const sequelize = require("../config/connection");
 
-class role extends Model {}
+class Role extends Model { }
 
-role.init({
-  id: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    primaryKey: true,
-    autoIncrement: true,
-  },
-  title: {
-    type: DataTypes.STRING,
-    allowNull: false,
-    validate: {
-      len: [1, 30],
+Role.init(
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    title: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        len: [1, 30],
+      },
+    },
+    salary: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        len: [4, 10],
+      },
+    },
+    department_id: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: "department",
+        key: "id",
+      },
     },
   },
-  salary: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    validate: {
-      len: [4, 10],
-    },
-  },
-  department_id: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    references: {
-      model: "department",
-      key: "id",
-    },
-  },
+  {
+    sequelize,
+    timestamps: false,
+    freezeTableName: true,
+    modelName: "role",
+  }
+);
 
-  sequelize,
-  freezeTableName: true,
-  modelName: "department",
-});
-
-module.exports = role;
+module.exports = Role;
