@@ -1,9 +1,10 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+
 const AddEmployee = () => {
-  const [employee, setEmployee] = useState({
+  const [employees, setEmployee] = useState({
     fist_name:'',
     last_name:'',
     email:'',
@@ -11,7 +12,7 @@ const AddEmployee = () => {
     manager:'',
     role:'',
   });
-  const [role, setRole] = useState([]);
+  const [roles, setRole] = useState([]);
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -30,12 +31,12 @@ const AddEmployee = () => {
   const handleSubmit = (e) => {
     e.preventDefault()
     const formData = new FormData();
-    formData.append('first_name', employee.first_name);
-    formData.append('last_name', employee.last_name);
-    formData.append('email', employee.email);
-    formData.append('salary', employee.salary);
-    formData.append('manager', employee.is_manager);
-    formData.append('role', employee.role);
+    formData.append('first_name', employees.first_name);
+    formData.append('last_name', employees.last_name);
+    formData.append('email', employees.email);
+    formData.append('salary', employees.salary);
+    formData.append('manager', employees.is_manager);
+    formData.append('role', roles.id);
 
     axios.post('/api/employees/', formData)
     .then(result => {
@@ -62,7 +63,7 @@ const AddEmployee = () => {
               id="inputName"
               placeholder="Enter Name"
               onChange={(e) =>
-                setEmployee({ ...employee, name: e.target.value })
+                setEmployee({ ...employees, name: e.target.value })
               }
             />
           </div>
@@ -75,7 +76,7 @@ const AddEmployee = () => {
               id="inputName"
               placeholder="Enter Name"
               onChange={(e) =>
-                setEmployee({ ...employee, name: e.target.value })
+                setEmployee({ ...employees, name: e.target.value })
               }
             />
           </div>
@@ -91,7 +92,7 @@ const AddEmployee = () => {
               placeholder="Enter Email"
               autoComplete="off"
               onChange={(e) =>
-                setEmployee({ ...employee, email: e.target.value })
+                setEmployee({ ...employees, email: e.target.value })
               }
             />
           </div>
@@ -106,7 +107,7 @@ const AddEmployee = () => {
               placeholder="Enter Salary"
               autoComplete="off"
               onChange={(e) =>
-                setEmployee({ ...employee, salary: e.target.value })
+                setEmployee({ ...employees, salary: e.target.value })
               }
             />
           </div>

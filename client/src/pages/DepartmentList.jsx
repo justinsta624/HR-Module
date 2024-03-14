@@ -1,10 +1,10 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const DepartmentList = () => {
   const [departments, setEmployee] = useState([]);
-  const navigate = useNavigate()
+
 
   useEffect(() => {
     axios
@@ -50,7 +50,7 @@ const DepartmentList = () => {
                 <td>{d.name}</td>                
                 <td>
                   <Link  to={`/api/departments/` + d.id}  className="btn btn-info btn-sm me-2">Edit</Link>
-                  <button  className="btn btn-warning btn-sm"  onClick={() => handleDelete(e.id)}>Delete</button>
+                  <button  className="btn btn-warning btn-sm"  onClick={() => handleDelete(d.id)}>Delete</button>
                 </td>
               </tr>
             ))}
