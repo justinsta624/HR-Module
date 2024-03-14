@@ -31,7 +31,7 @@ const DepartmentList = () => {
   return (
     <div className="px-5 mt-3">
       <div className="d-flex justify-content-center">
-        <h3>Employee List</h3>
+        <h3>Departments List</h3>
       </div>
       <Link to="api/departments" className="btn btn-success"> Add Department</Link>
       <div className="mt-3">
