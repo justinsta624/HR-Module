@@ -2,9 +2,11 @@ import './App.css';
 import { Outlet } from 'react-router-dom';
 
 import Navbar from './components/Navbar';
-import DepartmentList from './components/DepartmentList';
-import RoleList from './components/RoleList';
-import EmployeeList from './components/EmployeeList';
+import DepartmentList from './pages/DepartmentList';
+import RoleList from './pages/RoleList';
+import EmployeeList from './pages/EmployeeList';
+import EmployeeAdd from './pages/EmployeeAdd';
+
 
 function App() {
   return (
@@ -14,6 +16,7 @@ function App() {
       <DepartmentList />
       <RoleList />
       <EmployeeList />
+      <EmployeeAdd />      
     </>
   );
 }
