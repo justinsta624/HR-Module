@@ -110,15 +110,13 @@ const AddEmployee = () => {
               }
             />
           </div>
+{/* TO DO 
 
 
+find a solution for manager is true or false situation and figure it out that do we need role ID or role title   
 
 
-
-
-     
-
-
+            */ }
 
           <div className="col-12">
             <button type="submit" className="btn btn-primary w-100">Add Employee</button>
