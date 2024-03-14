@@ -5,9 +5,11 @@ const withAuth = require('../../utils/auth');
 // GET all departments
 router.get('/', /*withAuth,*/ async (req, res) => {
   try {
-    const departmentData = await Department.findAll({
-      include: [{ model: Role, attributes: ['title', 'salary'], include: [{ model: Employee, attributes: ['first_name', 'last_name'] }] }]
-    });
+    const departmentData = await Department.findAll(
+      // {
+      //   include: [{ model: Role, attributes: ['title', 'salary'], include: [{ model: Employee, attributes: ['first_name', 'last_name'] }] }]
+      // }
+    );
     res.status(200).json(departmentData);
   } catch (err) {
     res.status(500).json(err);
@@ -17,9 +19,11 @@ router.get('/', /*withAuth,*/ async (req, res) => {
 // GET a single department
 router.get('/:id', /*withAuth,*/ async (req, res) => {
   try {
-    const departmentData = await Department.findByPk(req.params.id, {
-      include: [{ model: Role, attributes: ['title', 'salary'], include: [{ model: Employee, attributes: ['first_name', 'last_name'] }] }]
-    });
+    const departmentData = await Department.findByPk(req.params.id,
+      // {
+      //   include: [{ model: Role, attributes: ['title', 'salary'], include: [{ model: Employee, attributes: ['first_name', 'last_name'] }] }]
+      // }
+    );
 
     if (!departmentData) {
       res.status(404).json({ message: 'No department found with that id!' });

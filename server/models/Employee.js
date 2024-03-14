@@ -1,7 +1,7 @@
 const { Model, DataTypes } = require("sequelize");
 const sequelize = require("../config/connection");
 
-class Employee extends Model {}
+class Employee extends Model { }
 
 Employee.init(
   {
@@ -25,6 +25,25 @@ Employee.init(
         len: [1, 30],
       },
     },
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        len: [1, 30],
+        isEmail: true,
+      },
+    },
+    salary: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        len: [4, 10],
+      },
+    },
+    is_manager: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
     role_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -33,8 +52,14 @@ Employee.init(
         key: "id",
       },
     },
+    // department_id: {
+    //   type: DataTypes.INTEGER,
+    //   references: {
+    //     model: "department",
+    //     key: "id",
+    //   },
+    // },
   },
-
   {
     sequelize,
     timestamps: false,
