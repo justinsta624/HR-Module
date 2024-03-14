@@ -12,7 +12,6 @@
 [![Node.js Badge](https://img.shields.io/badge/Node.js-393?style=for-the-badge&logo=nodedotjs&logoColor=fff)](https://nodejs.org/en)
 [![Dotenv Badge](https://img.shields.io/badge/Dotenv-000?style=for-the-badge&logo=javascript&logoColor=white)](https://www.npmjs.com/package/dotenv)
 [![Sequelize Badge](https://img.shields.io/badge/Sequelize-52B0E7?style=for-the-badge&logo=Sequelize&logoColor=white)](https://www.npmjs.com/package/sequelize)
-[![Handlebar Badge](https://img.shields.io/badge/Handlebars%20js-f0772b?style=for-the-badge&logo=handlebarsdotjs&logoColor=black)](https://www.npmjs.com/package/handlebars)
 [![GitHub Badge](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/justinsta624/)
 [![Heroku](https://img.shields.io/badge/heroku-%23430098.svg?style=for-the-badge&logo=heroku&logoColor=white)](https://dashboard.heroku.com/apps)
 
@@ -25,8 +24,8 @@
 
 ### In General
 * Essential role of projects in the journey to becoming a full-stack web developer.
-* First opportunity to demonstrate collaborative skills and coding abilities to employers.
-* Project serves as a focal point in the portfolio, highlighting teamwork.
+* When Apply for development jobs, portfolio is absolutely vital to opening doors to opportunities, showcases high-quality deployed examples of work.
+* Fantastic opportunity to show employers your collaborative skills and coding abilities, especially in the context of a scalable, user-focused MERN application.
 * Employers seek evidence of both individual capabilities and collaboration with other developers.
 * Increased chances of interviews and job offers with a portfolio featuring deployed collaborative projects.
 
@@ -152,14 +151,31 @@ HR-Module is deployed VIA following link </div>
 ## Tasks
 
 ### In General
+* Create a MERN stack single-page application that works with real-world data to solve a real-world challenge, with a focus on data and user demand.
+* Use React for the front end.
+* Use GraphQL with a Node.js and Express.js server.
+* Use MySQL2 and the Sequelize for the database.
+* Use queries and mutations for retrieving, adding, updating, and deleting data.
+* Be deployed using Heroku (with data).
+* Have a polished UI.
+* Be responsive.
+* Be interactive (i.e., accept and respond to user input).
+* Include authentication (JWT).
+* Protect sensitive API key information on the server.
+* Have a clean repository that meets quality coding standards (file structure, naming conventions, best practices for class and id naming conventions, indentation, high-quality comments, etc.).
+* Have a high-quality README (with unique name, description, technologies used, screenshot, and link to deployed application).
 
-* Refactor a fully functioning Google Books API search engine built with a RESTful API, turned it to be a GraphQL API built with Apollo Server.
-* The app was built using the MERN stack with a React front end, MongoDB database, and Node.js/Express.js server and API. It's already set up to allow users to save book searches to the back end.
+### CSS Styling
+* Look into the concept of CSS-in-JS, which abstracts CSS to the component level, using JavaScript to describe styles in a declarative and maintainable way. Some popular libraries include [styled-components](https://styled-components.com/) and [Emotion](https://emotion.sh/docs/introduction).
+* Try using a component library, such as [Semantic UI](https://semantic-ui.com/), [Chakra UI](https://chakra-ui.com/), or [Ant Design](https://ant.design/).
 
-1. Set up an Apollo Server to use GraphQL queries and mutations to fetch and modify data, replacing the existing RESTful API.
-2. Modify the existing authentication middleware so that it works in the context of a GraphQL API.
-3. Create an Apollo Provider so that requests can communicate with an Apollo Server.
-4. Deploy your application to Netlify
+### Payment Platform
+* Integrating the Stripe payment platform. (Even if you don’t create an e-commerce application, you could set up your site to accept charitable donations)
+
+### Progressive Web Application
+* Uses a web manifest
+* Uses a service worker for offline functionality
+* Is installable
 
 ### Vite: Steps to follow
 
@@ -270,6 +286,8 @@ Followings are the outcomes of the project 3:
 For details click on the following link to go to the "LICENSE" file:
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge&logo=mit)](https://opensource.org/licenses/MIT)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ---
 © 2024 "HR-Module" by `Project 3` `Group 5`. All Rights Reserved.
