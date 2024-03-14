@@ -1,25 +1,25 @@
-import User, { belongsTo } from "./User";
-import Department, { hasMany } from "./Department";
-import Role, { belongsTo as _belongsTo } from "./Role";
-import { belongsTo as __belongsTo } from "./Employee";
+const User = require("./User");
+const Department = require("./Department");
+const Role = require("./Role");
+const Employee = require("./Employee");
 
-hasMany(User, {
+Department.hasMany(Employee, {
   foreignKey: "department_id",
 });
 
-belongsTo(Department, {
+Employee.belongsTo(Department, {
   foreignKey: "department_id",
 });
-__belongsTo(Role, {
+Employee.belongsTo(Role, {
   foreignKey: "role_id",
 });
 
-_belongsTo(Department, {
+Role.belongsTo(Department, {
   foreignKey: "department_id",
 });
 
-hasMany(Role, {
-  foreignKey: "department_id",
+Role.hasMany(Employee, {
+  foreignKey: "role_id",
 });
 
-export default { User, Department, Role, Employee };
+module.exports = { User, Department, Role, Employee };
