@@ -3,6 +3,7 @@ import { Outlet } from 'react-router-dom';
 
 import Navbar from './components/Navbar';
 import DepartmentList from './pages/DepartmentList';
+import Login from './components/Login';
 
 {/* 
 import RoleList from './pages/RoleList';
