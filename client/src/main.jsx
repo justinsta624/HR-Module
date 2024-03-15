@@ -14,7 +14,6 @@ import EmployeeAdd from './pages/EmployeeAdd';
 import ManagerList from './pages/ManagerList';
 import DepartmentAdd from './pages/DepartmentAdd';
 import ErrorPage from './pages/ErrorPage';
-import HomePage from './pages/HomePage';      
 import LoginPage from './pages/LoginPage';
 
 const router = createBrowserRouter([
@@ -25,7 +24,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <HomePage />,
+        element: <LoginPage />,
       },
       {
         path: 'api/departments',
@@ -51,10 +50,10 @@ const router = createBrowserRouter([
         path: 'add',
         element: <DepartmentAdd />,
       },
-      {
+    /*  {
         path: 'api/login',
         element: <LoginPage />,
-      },
+      }, */
     ]
   }
 ]);

@@ -1,23 +1,21 @@
 {
-  "name": "hrmodule-project3",
+  "name": "HR-Module",
   "version": "1.0.0",
   "description": "<a ID=\"readme-top\"></a>",
   "main": "server/server.js",
   "scripts": {
     "install": "cd server && npm i && cd ../client && npm i",
-    "seed": "cd server && npm run seed",    
-    "start": "cd server && npm run start",
-    "dev": "cd client && npm run start",
+    "seed": "cd server && npm run seed",
+    "start": "concurrently \"cd server && npm run start\" \"cd client && npm run start\"",
     "develop": "concurrently \"cd server && npm run watch\" \"cd client && npm start\"",
     "build": "cd client && npm run build",
     "render-build": "npm install && npm run build"
-
   },
   "keywords": [],
   "author": "project-3 group-5",
   "license": "ISC",
   "devDependencies": {
-    "concurrently": "^5.1.0"
+    "concurrently": "^8.2.2"
   },
   "dependencies": {
     "vite": "^5.1.6"
@@ -31,4 +29,3 @@
   },
   "homepage": "https://github.com/ozdaldogru/HR-Module#readme"
 }
-

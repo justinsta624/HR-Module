@@ -14,7 +14,7 @@ const AppNavbar = () => { // Defining a functional component called AppNavbar
     <>
       <Navbar bg='dark' variant='dark' expand='lg'>
         <Container fluid>
-          <Navbar.Brand as={Link} to='/'>
+          <Navbar.Brand as={Link} to='http://localhost:3000'>
           💻 Employee Management System: HRRIS 💼
           </Navbar.Brand>
           <Navbar.Toggle aria-controls='navbar' />
