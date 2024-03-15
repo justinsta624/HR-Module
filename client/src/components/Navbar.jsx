@@ -20,13 +20,16 @@ const AppNavbar = () => { // Defining a functional component called AppNavbar
           <Navbar.Toggle aria-controls='navbar' />
           <Navbar.Collapse id='navbar' className='d-flex flex-row-reverse'>
             <Nav className='ml-auto d-flex'>
-              <Nav.Link as={Link} to='/department'>
+              <Nav.Link as={Link} to='api/departments'>
                 Departments
               </Nav.Link>
-              <Nav.Link as={Link} to='/employee'>
+              <Nav.Link as={Link} to='api/managers'>
+                Managers
+              </Nav.Link>                
+              <Nav.Link as={Link} to='api/employees'>
                 Employees
               </Nav.Link>
-              <Nav.Link as={Link} to='/role'>
+              <Nav.Link as={Link} to='api/roles'>
                 Roles
               </Nav.Link>
               {Auth.loggedIn() ? (
