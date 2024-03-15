@@ -2,38 +2,38 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-const DepartmentList = () => {
-  const [departments, setEmployee] = useState([]);
-
+function DepartmentList() {
+  const [departments, setDepartments] = useState([]);
 
   useEffect(() => {
-    axios
-      .get("api/departments")
-      .then((result) => {
-        if (result.data.Status) {
-          setEmployee(result.data.Result);
-        } else {
-          alert(result.data.Error);
-        }
+    axios.get('/api/departments')
+      .then(response => {
+        setDepartments(response.data);
       })
-      .catch((err) => console.log(err));
+      .catch(error => {
+        console.error('Error fetching departments:', error);
+      });
   }, []);
+
+ 
   const handleDelete = (id) => {
-    axios.delete('api/departments'+id)
+    axios.delete('api/departments/'+id)
     .then(result => {
         if(result.data.Status) {
             window.location.reload()
         } else {
-            alert(result.data.Error)
+            console.log(result.data.Error)
         }
     })
   } 
+
+
   return (
     <div className="px-5 mt-3">
       <div className="d-flex justify-content-center">
         <h3>Departments List</h3>
       </div>
-      <Link to="api/departments" className="btn btn-success"> Add Department</Link>
+      <Link to={`api/departments/add`} className="btn btn-success"> Add Department</Link> 
       <div className="mt-3">
         <table className="table">
           <thead>
@@ -44,13 +44,13 @@ const DepartmentList = () => {
             </tr>
           </thead>
           <tbody>
-            {departments.map((d) => (
-              <tr key={d.id}>
-                <td>{d.id}</td>
-                <td>{d.name}</td>                
+            {departments.map((department) => (
+              <tr key={department.id}>
+                <td>{department.id}</td>
+                <td>{department.name}</td>                
                 <td>
-                  <Link  to={`/api/departments/` + d.id}  className="btn btn-info btn-sm me-2">Edit</Link>
-                  <button  className="btn btn-warning btn-sm"  onClick={() => handleDelete(d.id)}>Delete</button>
+                  <Link  to={`/api/departments/` + department.id}  className="btn btn-info btn-sm me-2">Edit</Link>
+                  <button  className="btn btn-warning btn-sm"  onClick={() => handleDelete(department.id)}>Delete</button>
                 </td>
               </tr>
             ))}
@@ -59,6 +59,6 @@ const DepartmentList = () => {
       </div>
     </div>
   );
-};
+}
 
 export default DepartmentList;

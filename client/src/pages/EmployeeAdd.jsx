@@ -22,7 +22,7 @@ const AddEmployee = () => {
         if (result.data.Status) {
             setRole(result.data.Result);
         } else {
-          alert(result.data.Error);
+          console.log(result.data.Error);
         }
       })
       .catch((err) => console.log(err));
@@ -43,7 +43,7 @@ const AddEmployee = () => {
         if(result.data.Status) {
             navigate('/api/employees')
         } else {
-            alert(result.data.Error)
+            console.log(result.data.Error)
         }
     })
     .catch(err => console.log(err))
@@ -61,7 +61,7 @@ const AddEmployee = () => {
               type="text"
               className="form-control rounded-0"
               id="inputName"
-              placeholder="Enter Name"
+              placeholder="Enter First Name"
               onChange={(e) =>
                 setEmployee({ ...employees, name: e.target.value })
               }
@@ -74,7 +74,7 @@ const AddEmployee = () => {
               type="text"
               className="form-control rounded-0"
               id="inputName"
-              placeholder="Enter Name"
+              placeholder="Enter Last Name"
               onChange={(e) =>
                 setEmployee({ ...employees, name: e.target.value })
               }

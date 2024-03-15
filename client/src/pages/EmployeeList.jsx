@@ -2,22 +2,19 @@ import axios from "axios";
 import  { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-const EmployeeList = () => {
-  const [employees, setEmployee] = useState([]);
+  function EmployeeList() {
+    const [employees, setEmployee] = useState([]);
+    
+    useEffect(() => {
+      axios.get('/api/employees')
+        .then(response => {
+          setEmployee(response.data);
+        })
+        .catch(error => {
+          console.error('Error fetching employees:', error);
+        });
+    }, []);
 
-
-  useEffect(() => {
-    axios
-      .get("api/employees")
-      .then((result) => {
-        if (result.data.Status) {
-          setEmployee(result.data.Result);
-        } else {
-          alert(result.data.Error);
-        }
-      })
-      .catch((err) => console.log(err));
-  }, []);
   const handleDelete = (id) => {
     axios.delete('api/employees'+id)
     .then(result => {
@@ -47,16 +44,16 @@ const EmployeeList = () => {
             </tr>
           </thead>
           <tbody>
-            {employees.map((e) => (
-              <tr key={e.id}>
-                <td>{e.first_name}</td>
-                <td>{e.last_name}</td>                
-                <td>{e.email}</td>
-                <td>{e.salary}</td>
-                <td>{e.role_id}</td>
+            {employees.map((employee) => (
+              <tr key={employee.id}>
+                <td>{employee.first_name}</td>
+                <td>{employee.last_name}</td>                
+                <td>{employee.email}</td>
+                <td>{employee.salary}</td>
+                <td>{employee.role_id}</td>
                 <td>
-                  <Link  to={`/api/employees/` + e.id}  className="btn btn-info btn-sm me-2">Edit</Link>
-                  <button  className="btn btn-warning btn-sm"  onClick={() => handleDelete(e.id)}>Delete</button>
+                  <Link  to={`/api/employees/` + employee.id}  className="btn btn-info btn-sm me-2">Edit</Link>
+                  <button  className="btn btn-warning btn-sm"  onClick={() => handleDelete(employee.id)}>Delete</button>
                 </td>
               </tr>
             ))}
@@ -65,6 +62,6 @@ const EmployeeList = () => {
       </div>
     </div>
   );
-};
+}
 
 export default EmployeeList;
