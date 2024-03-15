@@ -6,6 +6,7 @@ import DepartmentList from './pages/DepartmentList';
 import RoleList from './pages/RoleList';
 import EmployeeList from './pages/EmployeeList';
 import EmployeeAdd from './pages/EmployeeAdd';
+import ManagerList from './pages/ManagerList';
 
 
 function App() {
@@ -16,7 +17,8 @@ function App() {
       <DepartmentList />
       <RoleList />
       <EmployeeList />
-      <EmployeeAdd />      
+      <EmployeeAdd />
+      <ManagerList />      
     </>
   );
 }

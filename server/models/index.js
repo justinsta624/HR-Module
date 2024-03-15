@@ -2,6 +2,7 @@ const User = require("./User");
 const Department = require("./Department");
 const Role = require("./Role");
 const Employee = require("./Employee");
+const Manager = require("./Manager");
 
 Department.hasMany(Employee, {
   foreignKey: "department_id",
@@ -55,7 +56,7 @@ Department.hasMany(Role, {
 // });
 
 User.hasMany(Department, {
-  foreignKey: 'user_id',
+  foreignKey: "user_id",
 });
 
 // User.hasMany(Employee, {
@@ -67,7 +68,7 @@ User.hasMany(Department, {
 // });
 
 Department.hasMany(Role, {
-  foreignKey: 'department_id',
+  foreignKey: "department_id",
 });
 
 // Department.hasMany(Employee, {
@@ -75,11 +76,11 @@ Department.hasMany(Role, {
 // });
 
 Role.belongsTo(Department, {
-  foreignKey: 'department_id',
+  foreignKey: "department_id",
 });
 
 Role.hasMany(Employee, {
-  foreignKey: 'role_id',
+  foreignKey: "role_id",
 });
 
 // Employee.belongsTo(Department, {
@@ -90,5 +91,20 @@ Role.hasMany(Employee, {
 //   foreignKey: 'role_id',
 // });
 
+Department.hasMany(Manager, {
+  foreignKey: "department_id",
+});
 
-module.exports = { User, Department, Role, Employee };
+Manager.belongsTo(Department, {
+  foreignKey: "department_id",
+});
+
+Role.hasMany(Manager, {
+  foreignKey: "role_id",
+});
+
+Manager.belongsTo(Role, {
+  foreignKey: "role_id",
+});
+
+module.exports = { User, Department, Role, Employee, Manager };
