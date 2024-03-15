@@ -2,29 +2,27 @@ import axios from "axios";
 import  { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-const ManagerList = () => {
+function ManagerList() {
   const [managers, setManager] = useState([]);
-
-
+  
   useEffect(() => {
-    axios
-      .get("api/managers")
-      .then((result) => {
-        if (result.data.Status) {
-          setManager(result.data.Result);
-        } else {
-          alert(result.data.Error);
-        }
+    axios.get('/api/managers')
+      .then(response => {
+        setManager(response.data);
       })
-      .catch((err) => console.log(err));
+      .catch(error => {
+        console.error('Error fetching managers:', error);
+      });
   }, []);
+
+
   const handleDelete = (id) => {
     axios.delete('api/managers'+id)
     .then(result => {
         if(result.data.Status) {
             window.location.reload()
         } else {
-            alert(result.data.Error)
+            console.log(result.data.Error)
         }
     })
   } 
@@ -46,15 +44,15 @@ const ManagerList = () => {
             </tr>
           </thead>
           <tbody>
-            {managers.map((e) => (
-              <tr key={e.id}>
-                <td>{e.first_name}</td>
-                <td>{e.last_name}</td>                
-                <td>{e.email}</td>
-                <td>{e.role_id}</td>
+            {managers.map((manager) => (
+              <tr key={manager.id}>
+                <td>{manager.first_name}</td>
+                <td>{manager.last_name}</td>                
+                <td>{manager.email}</td>
+                <td>{manager.role_id}</td>
                 <td>
-                  <Link  to={`/api/managers/` + e.id}  className="btn btn-info btn-sm me-2">Edit</Link>
-                  <button  className="btn btn-warning btn-sm"  onClick={() => handleDelete(e.id)}>Delete</button>
+                  <Link  to={`/api/managers/` + manager.id}  className="btn btn-info btn-sm me-2">Edit</Link>
+                  <button  className="btn btn-warning btn-sm"  onClick={() => handleDelete(manager.id)}>Delete</button>
                 </td>
               </tr>
             ))}
@@ -63,6 +61,6 @@ const ManagerList = () => {
       </div>
     </div>
   );
-};
+}
 
 export default ManagerList;

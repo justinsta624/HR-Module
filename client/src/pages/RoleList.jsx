@@ -2,22 +2,20 @@ import axios from "axios";
 import  { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-const RolesList = () => {
-  const [roles, setEmployee] = useState([]);
- 
+function RoleList() {
+  const [roles, setRoles] = useState([]);
 
   useEffect(() => {
-    axios
-      .get("api/roles")
-      .then((result) => {
-        if (result.data.Status) {
-          setEmployee(result.data.Result);
-        } else {
-          alert(result.data.Error);
-        }
+    axios.get('/api/roles')
+      .then(response => {
+        setRoles(response.data);
       })
-      .catch((err) => console.log(err));
+      .catch(error => {
+        console.error('Error fetching roles:', error);
+      });
   }, []);
+
+
   const handleDelete = (id) => {
     axios.delete('api/roles'+id)
     .then(result => {
@@ -44,13 +42,13 @@ const RolesList = () => {
             </tr>
           </thead>
           <tbody>
-            {roles.map((r) => (
-              <tr key={r.id}>
-                <td>{r.id}</td>
-                <td>{r.name}</td>                
+            {roles.map((role) => (
+              <tr key={role.id}>
+                <td>{role.id}</td>
+                <td>{role.name}</td>                
                 <td>
-                  <Link  to={`/api/roles/` + r.id}  className="btn btn-info btn-sm me-2">Edit</Link>
-                  <button  className="btn btn-warning btn-sm"  onClick={() => handleDelete(r.id)}>Delete</button>
+                  <Link  to={`/api/roles/` + role.id}  className="btn btn-info btn-sm me-2">Edit</Link>
+                  <button  className="btn btn-warning btn-sm"  onClick={() => handleDelete(role.id)}>Delete</button>
                 </td>
               </tr>
             ))}
@@ -59,7 +57,7 @@ const RolesList = () => {
       </div>
     </div>
   );
-};
+}
 
-export default RolesList;
+export default RoleList;
 
