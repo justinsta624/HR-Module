@@ -12,3 +12,9 @@ VALUES ("Mark", "Namesmith", 2, NULL),
 ("Joe", "Nameth", 3, 2),
 	   ("Steve", "Smith", 1, 2),
        ("John", "Stewart", 1, 2);
+
+       INSERT INTO manager (first_name, last_name, email, role_id)
+VALUES ("Mark", "Namesmith", 2, NULL),
+("Joe", "Nameth", 3, 2),
+	   ("Steve", "Smith", 1, 2),
+       ("John", "Stewart", 1, 2);

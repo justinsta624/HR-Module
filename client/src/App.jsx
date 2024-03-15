@@ -9,6 +9,7 @@ import Login from './components/Login';
 import RoleList from './pages/RoleList';
 import EmployeeList from './pages/EmployeeList';
 import EmployeeAdd from './pages/EmployeeAdd';
+import ManagerList from './pages/ManagerList';
 */}
 
 
@@ -21,7 +22,8 @@ function App() {
       <DepartmentList />
   {/* <RoleList /> */} 
   {/* <EmployeeList /> */} 
-  {/* <EmployeeAdd />  */}  
+  {/* <EmployeeAdd />  */}
+  {/* <ManagerList /> */}
     </>
   );
 }
@@ -36,6 +38,7 @@ import NavBar from './components/Navbar';
 import DepartmentList from './pages/DepartmentList';
 import RoleList from './pages/RoleList';
 import EmployeeList from './pages/EmployeeList';
+import ManagerList from './pages/ManagerList';
 
 
 
