@@ -1,92 +1,91 @@
-// see SignupForm.js for comments
-import { useState } from 'react';
-import { Form, Button, Alert } from 'react-bootstrap';
+import React, { useState } from 'react';
+import axios from 'axios';
 
-import { loginUser } from '../utils/API';
-import Auth from '../utils/auth';
+const Login = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [emailError, setEmailError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+  const [submitStatus, setSubmitStatus] = useState('');
 
-const LoginForm = () => {
-  const [userFormData, setUserFormData] = useState({ email: '', password: '' });
-  const [validated] = useState(false);
-  const [showAlert, setShowAlert] = useState(false);
-
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setUserFormData({ ...userFormData, [name]: value });
+  const handleEmailChange = (e) => {
+    const newEmail = e.target.value;
+    setEmail(newEmail);
+    setEmailError(!newEmail ? 'Email is required' : '');
   };
 
-  const handleFormSubmit = async (event) => {
-    event.preventDefault();
+  const handlePasswordChange = (e) => {
+    const newPassword = e.target.value;
+    setPassword(newPassword);
+    setPasswordError(!newPassword ? 'Password is required' : '');
+  };
 
-    // check if form has everything (as per react-bootstrap docs)
-    const form = event.currentTarget;
-    if (form.checkValidity() === false) {
-      event.preventDefault();
-      event.stopPropagation();
-    }
+  const isValidEmail = (email) => {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  };
 
-    try {
-      const response = await loginUser(userFormData);
+  const handleInvalidEmail = () => {
+    setEmailError(!email ? 'Email is required' : !isValidEmail(email) ? 'Invalid email address' : '');
+  };
 
-      if (!response.ok) {
-        throw new Error('something went wrong!');
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
+
+    setEmailError(!email ? 'Email is required' : !isValidEmail(email) ? 'Invalid email address' : ''); setPasswordError(!password ? 'Password is required' : '');
+
+    if (email && password) {
+      try {
+        const response = await axios.post('/api/users/login', { email, password });
+
+        if (response.status === 200) {
+          setSubmitStatus('Login successful');
+          // Redirect the user to another page or update UI as needed
+        } else {
+          setSubmitStatus('Invalid email or password');
+        }
+      } catch (error) {
+        setSubmitStatus('An error occurred');
+        console.error('An error occurred', error);
       }
-
-      const { token, user } = await response.json();
-      console.log(user);
-      Auth.login(token);
-    } catch (err) {
-      console.error(err);
-      setShowAlert(true);
     }
-
-    setUserFormData({
-      username: '',
-      email: '',
-      password: '',
-    });
   };
 
   return (
-    <>
-      <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
-        <Alert dismissible onClose={() => setShowAlert(false)} show={showAlert} variant='danger'>
-          Something went wrong with your login credentials!
-        </Alert>
-        <Form.Group className='mb-3'>
-          <Form.Label htmlFor='email'>Email</Form.Label>
-          <Form.Control
-            type='text'
-            placeholder='Your email'
-            name='email'
-            onChange={handleInputChange}
-            value={userFormData.email}
-            required
+    <div className="login-container">
+      <h2 className="">Login</h2>
+      <form className="form login-form" onSubmit={handleFormSubmit}>
+        <div className="mb-3">
+          <input
+            className="form-control"
+            type="text"
+            id="email-login"
+            placeholder="Email"
+            value={email}
+            onChange={handleEmailChange}
+            onBlur={handleInvalidEmail}
           />
-          <Form.Control.Feedback type='invalid'>Email is required!</Form.Control.Feedback>
-        </Form.Group>
+          {emailError && <div className="text-danger">{emailError}</div>}
+        </div>
+        <div className="mb-3">
+          <input
+            className="form-control"
+            type="password"
+            id="password-login"
+            placeholder="Password"
+            value={password}
+            onChange={handlePasswordChange}
+            onBlur={handlePasswordChange}
+          />
+          {passwordError && <div className="text-danger">{passwordError}</div>}
+        </div>
+        <div className="mb-3">
+          <button className="btn btn-dark" type="submit">Login</button>
+        </div>
+      </form>
+      {submitStatus && <div className="mt-3 alert alert-danger">{submitStatus}</div>}
+    </div>
 
-        <Form.Group className='mb-3'>
-          <Form.Label htmlFor='password'>Password</Form.Label>
-          <Form.Control
-            type='password'
-            placeholder='Your password'
-            name='password'
-            onChange={handleInputChange}
-            value={userFormData.password}
-            required
-          />
-          <Form.Control.Feedback type='invalid'>Password is required!</Form.Control.Feedback>
-        </Form.Group>
-        <Button
-          disabled={!(userFormData.email && userFormData.password)}
-          type='submit'
-          variant='success'>
-          Submit
-        </Button>
-      </Form>
-    </>
   );
 };
 
-export default LoginForm;
+export default Login;

@@ -1,110 +1,113 @@
-import { useState } from 'react';
-import { Form, Button, Alert } from 'react-bootstrap';
+import React, { useState } from 'react';
+import axios from 'axios';
 
-import { createUser } from '../utils/API';
-import Auth from '../utils/auth';
+const Signup = () => {
+  const [username, setUsername] = useState('');
+  const [signupEmail, setSignupEmail] = useState('');
+  const [signupPassword, setSignupPassword] = useState('');
+  const [usernameError, setUsernameError] = useState('');
+  const [signupEmailError, setSignupEmailError] = useState('');
+  const [signupPasswordError, setSignupPasswordError] = useState('');
+  const [signupSubmitStatus, setSignupSubmitStatus] = useState('');
 
-const SignupForm = () => {
-  // set initial form state
-  const [userFormData, setUserFormData] = useState({ username: '', email: '', password: '' });
-  // set state for form validation
-  const [validated] = useState(false);
-  // set state for alert
-  const [showAlert, setShowAlert] = useState(false);
-
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setUserFormData({ ...userFormData, [name]: value });
+  const handleUsernameChange = (e) => {
+    const newUsername = e.target.value;
+    setUsername(newUsername);
+    setUsernameError(!newUsername ? 'Name is required' : '');
   };
 
-  const handleFormSubmit = async (event) => {
-    event.preventDefault();
+  const handleSignupEmailChange = (e) => {
+    const newEmail = e.target.value;
+    setSignupEmail(newEmail);
+    setSignupEmailError(!newEmail ? 'Email is required' : '');
+  };
 
-    // check if form has everything (as per react-bootstrap docs)
-    const form = event.currentTarget;
-    if (form.checkValidity() === false) {
-      event.preventDefault();
-      event.stopPropagation();
-    }
+  const handleSignupPasswordChange = (e) => {
+    const newPassword = e.target.value;
+    setSignupPassword(newPassword);
+    setSignupPasswordError(!newPassword ? 'Password is required' : '');
+  };
 
-    try {
-      const response = await createUser(userFormData);
+  const isValidEmail = (email) => {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  };
 
-      if (!response.ok) {
-        throw new Error('something went wrong!');
+  const handleInvalidEmail = () => {
+    setSignupEmailError(!signupEmail ? 'Email is required' : !isValidEmail(signupEmail) ? 'Invalid email address' : '');
+  };
+
+  const handleSignupFormSubmit = async (e) => {
+    e.preventDefault();
+
+    setUsernameError(!username ? 'Name is required' : '');
+    setSignupEmailError(!signupEmail ? 'Email is required' : !isValidEmail(signupEmail) ? 'Invalid email address' : '');
+    setSignupPasswordError(!signupPassword ? 'Password is required' : '');
+
+    if (username && signupEmail && signupPassword) {
+      try {
+        console.log('Request Payload:', { username, email: signupEmail, password: signupPassword });
+        const response = await axios.post('/api/users/signup', { username, email: signupEmail, password: signupPassword });
+
+        if (response.status === 200) {
+          setSignupSubmitStatus('Signup successful');
+          // Redirect the user to another page or update UI as needed
+        } else {
+          setSignupSubmitStatus('Signup failed');
+        }
+      } catch (error) {
+        setSignupSubmitStatus('An error occurred during signup');
+        console.error('An error occurred during signup', error);
       }
-
-      const { token, user } = await response.json();
-      console.log(user);
-      Auth.login(token);
-    } catch (err) {
-      console.error(err);
-      setShowAlert(true);
     }
-
-    setUserFormData({
-      username: '',
-      email: '',
-      password: '',
-    });
   };
 
   return (
-    <>
-      {/* This is needed for the validation functionality above */}
-      <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
-        {/* show alert if server response is bad */}
-        <Alert dismissible onClose={() => setShowAlert(false)} show={showAlert} variant='danger'>
-          Something went wrong with your signup!
-        </Alert>
-
-        <Form.Group className='mb-3'>
-          <Form.Label htmlFor='username'>Username</Form.Label>
-          <Form.Control
-            type='text'
-            placeholder='Your username'
-            name='username'
-            onChange={handleInputChange}
-            value={userFormData.username}
-            required
+    <div className="signup-container">
+      <h2 className="">Sign Up</h2>
+      <form className="form signup-form" onSubmit={handleSignupFormSubmit}>
+        <div className="mb-3">
+          <input
+            className="form-control"
+            type="text"
+            id="name-signup"
+            placeholder="Name"
+            value={username}
+            onChange={handleUsernameChange}
+            onBlur={handleUsernameChange}
           />
-          <Form.Control.Feedback type='invalid'>Username is required!</Form.Control.Feedback>
-        </Form.Group>
-
-        <Form.Group className='mb-3'>
-          <Form.Label htmlFor='email'>Email</Form.Label>
-          <Form.Control
-            type='email'
-            placeholder='Your email address'
-            name='email'
-            onChange={handleInputChange}
-            value={userFormData.email}
-            required
+          {usernameError && <div className="text-danger">{usernameError}</div>}
+        </div>
+        <div className="mb-3">
+          <input
+            className="form-control"
+            type="text"
+            id="email-signup"
+            placeholder="Email"
+            value={signupEmail}
+            onChange={handleSignupEmailChange}
+            onBlur={handleInvalidEmail}
           />
-          <Form.Control.Feedback type='invalid'>Email is required!</Form.Control.Feedback>
-        </Form.Group>
-
-        <Form.Group className='mb-3'>
-          <Form.Label htmlFor='password'>Password</Form.Label>
-          <Form.Control
-            type='password'
-            placeholder='Your password'
-            name='password'
-            onChange={handleInputChange}
-            value={userFormData.password}
-            required
+          {signupEmailError && <div className="text-danger">{signupEmailError}</div>}
+        </div>
+        <div className="mb-3">
+          <input
+            className="form-control"
+            type="password"
+            id="password-signup"
+            placeholder="Password (minimum 8 characters)"
+            value={signupPassword}
+            onChange={handleSignupPasswordChange}
+            onBlur={handleSignupPasswordChange}
           />
-          <Form.Control.Feedback type='invalid'>Password is required!</Form.Control.Feedback>
-        </Form.Group>
-        <Button
-          disabled={!(userFormData.username && userFormData.email && userFormData.password)}
-          type='submit'
-          variant='success'>
-          Submit
-        </Button>
-      </Form>
-    </>
+          {signupPasswordError && <div className="text-danger">{signupPasswordError}</div>}
+        </div>
+        <div className="mb-3">
+          <button className="btn btn-dark" type="submit">Sign Up</button>
+        </div>
+      </form>
+      {signupSubmitStatus && <div className="mt-3 alert alert-danger">{signupSubmitStatus}</div>}
+    </div>
   );
 };
 
-export default SignupForm;
+export default Signup;
