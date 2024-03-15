@@ -20,13 +20,10 @@ function App() {
       <Navbar />
       <Outlet />
       <DepartmentList />
-      <RoleList />
-      <EmployeeList />
-      <EmployeeAdd />
-      <ManagerList />      
   {/* <RoleList /> */} 
   {/* <EmployeeList /> */} 
-  {/* <EmployeeAdd />  */}  
+  {/* <EmployeeAdd />  */}
+  {/* <ManagerList /> */}
     </>
   );
 }
@@ -41,6 +38,7 @@ import NavBar from './components/Navbar';
 import DepartmentList from './pages/DepartmentList';
 import RoleList from './pages/RoleList';
 import EmployeeList from './pages/EmployeeList';
+import ManagerList from './pages/ManagerList';
 
 
 
