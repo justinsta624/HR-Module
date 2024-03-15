@@ -49,3 +49,4 @@ Manager.init(
     modelName: "manager",
   }
 );
+module.exports = Manager;
