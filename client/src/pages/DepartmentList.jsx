@@ -33,7 +33,7 @@ function DepartmentList() {
       <div className="d-flex justify-content-center">
         <h3>Departments List</h3>
       </div>
-      <Link to={`api/departments/add`} className="btn btn-success"> Add Department</Link> 
+      <Link to="add" className="btn btn-success"> Add Department</Link> 
       <div className="mt-3">
         <table className="table">
           <thead>

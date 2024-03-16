@@ -30,7 +30,7 @@ import { Link } from "react-router-dom";
       <div className="d-flex justify-content-center">
         <h3>Employee List</h3>
       </div>
-      <Link to="api/employees" className="btn btn-success"> Add Employee</Link>
+      <Link to="add" className="btn btn-success"> Add Employee</Link>
       <div className="mt-3">
         <table className="table">
           <thead>

@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './index.css';
+
 
 import App from './App.jsx';
 //import Navbar from './components/Navbar';
@@ -13,8 +13,10 @@ import EmployeeList from './pages/EmployeeList';
 import EmployeeAdd from './pages/EmployeeAdd';
 import ManagerList from './pages/ManagerList';
 import DepartmentAdd from './pages/DepartmentAdd';
+import RoleAdd from './pages/RoleAdd';
 import ErrorPage from './pages/ErrorPage';
 import LoginPage from './pages/LoginPage';
+import ManagerAdd from './pages/ManagerAdd .jsx';
 
 const router = createBrowserRouter([
   {
@@ -27,33 +29,37 @@ const router = createBrowserRouter([
         element: <LoginPage />,
       },
       {
-        path: 'api/departments',
+        path: '/departments',
         element: <DepartmentList />,
       },
       {
-        path: 'api/employees',
+        path: '/employees',
         element: <EmployeeList />,
       },
       {
-        path: 'api/managers',
+        path: '/managers',
         element: <ManagerList />,
       },
       {
-        path: 'api/roles',
+        path: '/roles',
         element: <RoleList />,
       },
       {
-        path: 'api/employees/add',
+        path: '/employees/add',
         element: <EmployeeAdd />,
       },
       {
-        path: 'add',
+        path: '/departments/add',
         element: <DepartmentAdd />,
       },
-    /*  {
-        path: 'api/login',
-        element: <LoginPage />,
-      }, */
+      {
+        path: '/roles/add',
+        element: <RoleAdd />,
+      },
+      {
+        path: '/managers/add',
+        element: <ManagerAdd />,
+      },    
     ]
   }
 ]);

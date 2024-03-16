@@ -31,7 +31,7 @@ function RoleList() {
       <div className="d-flex justify-content-center">
         <h3>Roles List</h3>
       </div>
-      <Link to="api/departments" className="btn btn-success"> Add Role</Link>
+      <Link to="add" className="btn btn-success"> Add Role</Link>
       <div className="mt-3">
         <table className="table">
           <thead>

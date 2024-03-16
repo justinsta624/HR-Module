@@ -31,7 +31,7 @@ function ManagerList() {
       <div className="d-flex justify-content-center">
         <h3>Manager List</h3>
       </div>
-      <Link to="api/managers" className="btn btn-success"> Add Manager</Link>
+      <Link to="add" className="btn btn-success"> Add Manager</Link>
       <div className="mt-3">
         <table className="table">
           <thead>

@@ -14,22 +14,22 @@ const AppNavbar = () => { // Defining a functional component called AppNavbar
     <>
       <Navbar bg='dark' variant='dark' expand='lg'>
         <Container fluid>
-          <Navbar.Brand as={Link} to='http://localhost:3000'>
+          <Navbar.Brand as={Link} to='/'>
           💻 Employee Management System: HRRIS 💼
           </Navbar.Brand>
           <Navbar.Toggle aria-controls='navbar' />
           <Navbar.Collapse id='navbar' className='d-flex flex-row-reverse'>
             <Nav className='ml-auto d-flex'>
-              <Nav.Link as={Link} to='api/departments'>
+              <Nav.Link as={Link} to='/departments'>
                 Departments
               </Nav.Link>
-              <Nav.Link as={Link} to='api/managers'>
+              <Nav.Link as={Link} to='/managers'>
                 Managers
               </Nav.Link>                
-              <Nav.Link as={Link} to='api/employees'>
+              <Nav.Link as={Link} to='/employees'>
                 Employees
               </Nav.Link>
-              <Nav.Link as={Link} to='api/roles'>
+              <Nav.Link as={Link} to='/roles'>
                 Roles
               </Nav.Link>
               {Auth.loggedIn() ? (
