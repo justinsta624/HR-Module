@@ -49,7 +49,7 @@ function DepartmentList() {
                 <td>{department.id}</td>
                 <td>{department.name}</td>                
                 <td>
-                  <Link  to={`/api/departments/` + department.id}  className="btn btn-info btn-sm me-2">Edit</Link>
+                  <Link  to={`/departments/` + department.id}  className="btn btn-info btn-sm me-2">Edit</Link>
                   <button  className="btn btn-warning btn-sm"  onClick={() => handleDelete(department.id)}>Delete</button>
                 </td>
               </tr>

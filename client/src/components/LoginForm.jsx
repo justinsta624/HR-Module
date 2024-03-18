@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import axios from 'axios';
+import Auth from '../utils/auth'; // Importing the Auth service
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -40,6 +41,7 @@ const Login = () => {
         if (response.status === 200) {
           setSubmitStatus('Login successful');
           // Redirect the user to another page or update UI as needed
+          Auth.login(response.data.token);
         } else {
           setSubmitStatus('Invalid email or password');
         }

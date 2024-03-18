@@ -52,7 +52,7 @@ import { Link } from "react-router-dom";
                 <td>{employee.salary}</td>
                 <td>{employee.role_id}</td>
                 <td>
-                  <Link  to={`/api/employees/` + employee.id}  className="btn btn-info btn-sm me-2">Edit</Link>
+                  <Link  to={`/employees/` + employee.id}  className="btn btn-info btn-sm me-2">Edit</Link>
                   <button  className="btn btn-warning btn-sm"  onClick={() => handleDelete(employee.id)}>Delete</button>
                 </td>
               </tr>

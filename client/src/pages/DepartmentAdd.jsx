@@ -1,13 +1,22 @@
 import axios from "axios";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
 
 const DepartmentAdd = () => {
+  const { id } = useParams();
   const [departments, setDepartment] = useState({
     name:'',
   });
-
+  useEffect(() => {
+    if(id && id !== 'add') {
+      axios.get('/api/departments/'+id)
+      .then(result => {
+        setDepartment(result.data)
+      })
+      .catch(err => console.log(err))
+    }
+  }, [id])
   const navigate = useNavigate()
 
 
@@ -40,6 +49,8 @@ const DepartmentAdd = () => {
               className="form-control rounded-0"
               id="inputName"
               placeholder="Enter Department Name"
+              value={departments.name}
+              defaultValue={departments.name}
               onChange={(e) =>
                 setDepartment({ ...departments, name: e.target.value })
               }

@@ -1,9 +1,10 @@
 import axios from "axios";
-import {   useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
 
 const AddManager = () => {
+  const { id } = useParams();
   const [managers, setManager] = useState({
     first_name:'',
     last_name:'',
@@ -12,7 +13,15 @@ const AddManager = () => {
   });
  
   const navigate = useNavigate()
-
+  useEffect(() => {
+    if(id && id !== 'add') {
+      axios.get('/api/managers/'+id)
+      .then(result => {
+        setManager(result.data)
+      })
+      .catch(err => console.log(err))
+    }
+  }, [id])
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -45,6 +54,7 @@ const AddManager = () => {
               type="text"
               className="form-control rounded-0"
               id="inputName"
+              value={managers.first_name}
               placeholder="Enter First Name"
               onChange={(e) =>
                 setManager({ ...managers, first_name: e.target.value })

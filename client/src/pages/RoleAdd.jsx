@@ -1,14 +1,24 @@
 import axios from "axios";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
 
 const AddRole = () => {
+  const { id } = useParams();
   const [roles, setRole] = useState({
     title:'',
   });
 
   const navigate = useNavigate()
+  useEffect(() => {
+    if(id && id !== 'add') {
+      axios.get('/api/roles/'+id)
+      .then(result => {
+        setRole(result.data)
+      })
+      .catch(err => console.log(err))
+    }
+  }, [id])
 
 
   const handleSubmit = (e) => {
@@ -41,6 +51,7 @@ const AddRole = () => {
               className="form-control rounded-0"
               id="inputName"
               placeholder="Enter Role"
+              value={roles.title}
               onChange={(e) =>
                 setRole({ ...roles, title: e.target.value })
               }

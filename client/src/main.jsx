@@ -49,7 +49,15 @@ const router = createBrowserRouter([
         element: <EmployeeAdd />,
       },
       {
+        path: '/employees/:id',
+        element: <EmployeeAdd />,
+      },
+      {
         path: '/departments/add',
+        element: <DepartmentAdd />,
+      },
+      {
+        path: '/departments/:id',
         element: <DepartmentAdd />,
       },
       {
@@ -57,9 +65,17 @@ const router = createBrowserRouter([
         element: <RoleAdd />,
       },
       {
+        path: '/roles/:id',
+        element: <RoleAdd />,
+      },
+      {
         path: '/managers/add',
         element: <ManagerAdd />,
-      },    
+      },  
+      {
+        path: '/managers/:id',
+        element: <ManagerAdd />,
+      },  
     ]
   }
 ]);
