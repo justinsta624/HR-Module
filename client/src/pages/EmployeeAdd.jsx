@@ -1,9 +1,9 @@
 import axios from "axios";
-import {  useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 
 const AddEmployee = () => {
-  const { id } = useParams();
   const [employees, setEmployee] = useState({
     first_name:'',
     last_name:'',
@@ -38,7 +38,7 @@ const AddEmployee = () => {
     formData.append('manager', employees.is_manager);
     formData.append('role', roles.id);
 
-    axios.post('/api/employees/', formData)
+    axios.post('/api/employees/add', formData)
     .then(result => {
         if(result.data.Status) {
             navigate('/employees')
@@ -62,7 +62,6 @@ const AddEmployee = () => {
               className="form-control rounded-0"
               id="inputName"
               placeholder="Enter First Name"
-              value={employees.first_name}
               onChange={(e) =>
                 setEmployee({ ...employees, first_name: e.target.value })
               }
