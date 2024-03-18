@@ -30,7 +30,7 @@ import { Link } from "react-router-dom";
       <div className="d-flex justify-content-center">
         <h3>Employee List</h3>
       </div>
-      <Link to="api/employees" className="btn btn-success"> Add Employee</Link>
+      <Link to="add" className="btn btn-success"> Add Employee</Link>
       <div className="mt-3">
         <table className="table">
           <thead>
@@ -52,7 +52,7 @@ import { Link } from "react-router-dom";
                 <td>{employee.salary}</td>
                 <td>{employee.role_id}</td>
                 <td>
-                  <Link  to={`/api/employees/` + employee.id}  className="btn btn-info btn-sm me-2">Edit</Link>
+                  <Link  to={`/employees/` + employee.id}  className="btn btn-info btn-sm me-2">Edit</Link>
                   <button  className="btn btn-warning btn-sm"  onClick={() => handleDelete(employee.id)}>Delete</button>
                 </td>
               </tr>

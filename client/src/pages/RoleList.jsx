@@ -31,7 +31,7 @@ function RoleList() {
       <div className="d-flex justify-content-center">
         <h3>Roles List</h3>
       </div>
-      <Link to="api/departments" className="btn btn-success"> Add Role</Link>
+      <Link to="add" className="btn btn-success"> Add Role</Link>
       <div className="mt-3">
         <table className="table">
           <thead>
@@ -45,9 +45,9 @@ function RoleList() {
             {roles.map((role) => (
               <tr key={role.id}>
                 <td>{role.id}</td>
-                <td>{role.name}</td>                
+                <td>{role.title}</td>                
                 <td>
-                  <Link  to={`/api/roles/` + role.id}  className="btn btn-info btn-sm me-2">Edit</Link>
+                  <Link  to={`/roles/` + role.id}  className="btn btn-info btn-sm me-2">Edit</Link>
                   <button  className="btn btn-warning btn-sm"  onClick={() => handleDelete(role.id)}>Delete</button>
                 </td>
               </tr>

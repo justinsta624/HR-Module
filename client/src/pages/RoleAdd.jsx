@@ -3,32 +3,34 @@ import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 
-const DepartmentAdd = () => {
+const AddRole = () => {
   const { id } = useParams();
-  const [departments, setDepartment] = useState({
-    name:'',
+  const [roles, setRole] = useState({
+    title:'',
   });
+
+  const navigate = useNavigate()
   useEffect(() => {
     if(id && id !== 'add') {
-      axios.get('/api/departments/'+id)
+      axios.get('/api/roles/'+id)
       .then(result => {
-        setDepartment(result.data)
+        setRole(result.data)
       })
       .catch(err => console.log(err))
     }
   }, [id])
-  const navigate = useNavigate()
 
 
   const handleSubmit = (e) => {
     e.preventDefault()
     const formData = new FormData();
-    formData.append('name', departments.name);
+    formData.append('title', roles.title);
 
-    axios.post('/api/departments/', formData)
+
+    axios.post('/api/roles/', formData)
     .then(result => {
         if(result.data.Status) {
-            navigate('/departments')
+            navigate('/roles')
         } else {
             console.log(result.data.Error)
         }
@@ -39,26 +41,24 @@ const DepartmentAdd = () => {
   return (
     <div className="d-flex justify-content-center align-items-center mt-3">
       <div className="p-3 rounded w-50 border">
-        <h3 className="text-center">Add Department</h3>
+        <h3 className="text-center">Add Role</h3>
         <form className="row g-1" onSubmit={handleSubmit}>
           
           <div className="col-12">
-            <label htmlFor="inputName" className="form-label"> Department Name</label>
+            <label htmlFor="inputName" className="form-label"> Role Title</label>
             <input
               type="text"
               className="form-control rounded-0"
               id="inputName"
-              placeholder="Enter Department Name"
-              value={departments.name}
-              defaultValue={departments.name}
+              placeholder="Enter Role"
+              value={roles.title}
               onChange={(e) =>
-                setDepartment({ ...departments, name: e.target.value })
+                setRole({ ...roles, title: e.target.value })
               }
             />
           </div>
-
           <div className="col-12">
-            <button type="submit" className="btn btn-primary w-100">Add Department</button>
+            <button type="submit" className="btn btn-primary w-100">Add Role</button>
           </div>
         </form>
       </div>
@@ -66,4 +66,4 @@ const DepartmentAdd = () => {
   );
 };
 
-export default DepartmentAdd;
+export default AddRole;

@@ -33,7 +33,7 @@ function DepartmentList() {
       <div className="d-flex justify-content-center">
         <h3>Departments List</h3>
       </div>
-      <Link to={`api/departments/add`} className="btn btn-success"> Add Department</Link> 
+      <Link to="add" className="btn btn-success"> Add Department</Link> 
       <div className="mt-3">
         <table className="table">
           <thead>
@@ -49,7 +49,7 @@ function DepartmentList() {
                 <td>{department.id}</td>
                 <td>{department.name}</td>                
                 <td>
-                  <Link  to={`/api/departments/` + department.id}  className="btn btn-info btn-sm me-2">Edit</Link>
+                  <Link  to={`/departments/` + department.id}  className="btn btn-info btn-sm me-2">Edit</Link>
                   <button  className="btn btn-warning btn-sm"  onClick={() => handleDelete(department.id)}>Delete</button>
                 </td>
               </tr>

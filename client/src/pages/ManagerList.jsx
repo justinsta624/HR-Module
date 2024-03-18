@@ -31,7 +31,7 @@ function ManagerList() {
       <div className="d-flex justify-content-center">
         <h3>Manager List</h3>
       </div>
-      <Link to="api/managers" className="btn btn-success"> Add Manager</Link>
+      <Link to="add" className="btn btn-success"> Add Manager</Link>
       <div className="mt-3">
         <table className="table">
           <thead>
@@ -51,7 +51,7 @@ function ManagerList() {
                 <td>{manager.email}</td>
                 <td>{manager.role_id}</td>
                 <td>
-                  <Link  to={`/api/managers/` + manager.id}  className="btn btn-info btn-sm me-2">Edit</Link>
+                  <Link  to={`/managers/` + manager.id}  className="btn btn-info btn-sm me-2">Edit</Link>
                   <button  className="btn btn-warning btn-sm"  onClick={() => handleDelete(manager.id)}>Delete</button>
                 </td>
               </tr>
