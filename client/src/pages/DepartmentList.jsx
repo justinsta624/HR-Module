@@ -1,9 +1,12 @@
+import { useEffect } from "react";
+import { useState } from "react";
 import axios from "axios";
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function DepartmentList() {
   const [departments, setDepartments] = useState([]);
+
+  const navigate = useNavigate()
 
   useEffect(() => {
     axios.get('/api/departments')
@@ -15,18 +18,14 @@ function DepartmentList() {
       });
   }, []);
 
- 
-  const handleDelete = (id) => {
-    axios.delete('api/departments/'+id)
-    .then(result => {
-        if(result.data.Status) {
-            window.location.reload()
-        } else {
-            console.log(result.data.Error)
-        }
-    })
-  } 
-
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(`api/departments/${id}`);
+      navigate("/departments");
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <div className="px-5 mt-3">
@@ -40,6 +39,7 @@ function DepartmentList() {
             <tr>
               <th>Id</th>
               <th>Department Name</th>
+              <th>User Id</th>              
               <th>Action</th>
             </tr>
           </thead>
@@ -47,7 +47,8 @@ function DepartmentList() {
             {departments.map((department) => (
               <tr key={department.id}>
                 <td>{department.id}</td>
-                <td>{department.name}</td>                
+                <td>{department.name}</td>   
+                <td>{department.user_id}</td>                             
                 <td>
                   <Link  to={`/departments/` + department.id}  className="btn btn-info btn-sm me-2">Edit</Link>
                   <button  className="btn btn-warning btn-sm"  onClick={() => handleDelete(department.id)}>Delete</button>
