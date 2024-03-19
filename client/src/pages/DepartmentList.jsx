@@ -1,22 +1,49 @@
-import { useEffect } from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
+import Auth from '../utils/auth'; // Importing the Auth service
+
+// Higher-order component for authentication check
+const withAuth = (WrappedComponent) => {
+  return (props) => {
+    const navigate = useNavigate();
+
+    useEffect(() => {
+      // Check if user is logged in
+      if (!Auth.loggedIn()) {
+        // If user is not logged in, redirect to login page
+        navigate('/');
+      }
+    }, [navigate]);
+
+    // Render the wrapped component if user is logged in
+    return Auth.loggedIn() ? <WrappedComponent {...props} /> : null;
+  };
+};
 
 function DepartmentList() {
   const [departments, setDepartments] = useState([]);
-
-  const navigate = useNavigate()
+  const [isLoading, setIsLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
+    // Check if user is logged in before fetching departments
+    if (!Auth.loggedIn()) {
+      // If user is not logged in, redirect to login page
+      navigate('/');
+      return;
+    }
+
     axios.get('/api/departments')
       .then(response => {
         setDepartments(response.data);
+        setIsLoading(false);
       })
       .catch(error => {
         console.error('Error fetching departments:', error);
+        setIsLoading(false);
       });
-  }, []);
+  }, [navigate]);
 
   const handleDelete = async (id) => {
     try {
@@ -26,6 +53,11 @@ function DepartmentList() {
       console.log(err);
     }
   };
+
+  // If loading, show loading indicator
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="px-5 mt-3">
@@ -50,8 +82,8 @@ function DepartmentList() {
                 <td>{department.name}</td>   
                 <td>{department.user_id}</td>                             
                 <td>
-                  <Link  to={`/departments/` + department.id}  className="btn btn-info btn-sm me-2">Edit</Link>
-                  <button  className="btn btn-warning btn-sm"  onClick={() => handleDelete(department.id)}>Delete</button>
+                  <Link to={`/departments/` + department.id} className="btn btn-info btn-sm me-2">Edit</Link>
+                  <button className="btn btn-warning btn-sm" onClick={() => handleDelete(department.id)}>Delete</button>
                 </td>
               </tr>
             ))}
@@ -62,4 +94,5 @@ function DepartmentList() {
   );
 }
 
-export default DepartmentList;
+// Wrap the DepartmentList component with the withAuth HOC
+export default withAuth(DepartmentList);

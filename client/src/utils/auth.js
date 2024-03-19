@@ -1,47 +1,37 @@
-// use this to decode a token and get the user's information out of it
-import decode from 'jwt-decode';
-
-// create a new class to instantiate for a user
 class AuthService {
   // get user data
   getProfile() {
-    return decode(this.getToken());
+    return this.getUser();
   }
 
-  // check if user's logged in
+  // check if user is logged in
   loggedIn() {
-    // Checks if there is a saved token and it's still valid
-    const token = this.getToken();
-    return !!token && !this.isTokenExpired(token); // handwaiving here
+    return !!this.getUser();
   }
 
-  // check if token is expired
-  isTokenExpired(token) {
-    try {
-      const decoded = decode(token);
-      if (decoded.exp < Date.now() / 1000) {
-        return true;
-      } else return false;
-    } catch (err) {
-      return false;
-    }
+  // get user from session storage
+  getUser() {
+    const user = sessionStorage.getItem('user');
+    return user ? JSON.parse(user) : null;
   }
 
-  getToken() {
-    // Retrieves the user token from localStorage
-    return localStorage.getItem('id_token');
+// login user
+login(user) {
+  if (!user) {
+    throw new Error('Invalid user object. User object must be provided for login.');
   }
 
-  login(idToken) {
-    // Saves user token to localStorage
-    localStorage.setItem('id_token', idToken);
-    window.location.assign('/departments');
-  }
+  // Save user to session storage
+  sessionStorage.setItem('user', JSON.stringify(user));
+  window.location.assign('/departments');
+}
 
+
+  // logout user
   logout() {
-    // Clear user token and profile data from localStorage
-    localStorage.removeItem('id_token');
-    // this will reload the page and reset the state of the application
+    // Clear user from session storage
+    sessionStorage.removeItem('user');
+    // Reload the page to reset the state of the application
     window.location.assign('/');
   }
 }

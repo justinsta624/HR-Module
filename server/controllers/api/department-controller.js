@@ -5,26 +5,23 @@ const withAuth = require("../../utils/auth");
 // GET all department data
 router.get(
   "/",
-  router.get(
-    "/",
-    /*withAuth,*/ async (req, res) => {
-      try {
-        const departmentData = await Department.findAll();
+    withAuth, async (req, res) => {
+    try {
+      const departmentData = await Department.findAll();
 
-        // Map department data to an array of objects containing specific attributes
-        const departmentObjects = departmentData.map((department) => ({
-          id: department.id,
-          name: department.name,
-          user_id: department.user_id,
-        }));
+      // Map department data to an array of objects containing specific attributes
+      const departmentObjects = departmentData.map((department) => ({
+        id: department.id,
+        name: department.name,
+        user_id: department.user_id,
+      }));
 
-        res.status(200).json(departmentObjects);
-      } catch (err) {
-        res.status(500).json(err);
-      }
+      res.status(200).json(departmentObjects);
+    } catch (err) {
+      res.status(500).json(err);
     }
-  )
-);
+  }
+)
 
 // GET a single department
 router.get(
