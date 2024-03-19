@@ -1,12 +1,12 @@
 import { useEffect } from "react";
 import { useState } from "react";
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function RoleList() {
   const [roles, setRoles] = useState([]);
 
-  const navigate = useNavigate()
+
 
   useEffect(() => {
     axios.get('/api/roles')
@@ -18,14 +18,13 @@ function RoleList() {
       });
   }, []);
 
-  const handleDelete = async (id) => {
-    try {
-      await axios.delete("api/roles/"+id);
-      navigate("/roles");
-    } catch (err) {
-      console.log(err);
+  const handleDelete = (id) => {
+    if(window.confirm("Are You Sure")) {
+      axios.delete(`api/roles/${id}`);
+      window.confirm("Deleted");
+      window.location.reload()
     }
-  };
+  } 
 
   return (
     <div className="px-5 mt-3">

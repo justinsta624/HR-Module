@@ -77,9 +77,9 @@ const AddManager = () => {
           <div className="col-12">
             <label htmlFor="inputText" className="form-label">Role ID</label>
             <input
-              type="text"
+              type="number"
               className="form-control rounded-0"
-              id="inputEmail4"
+              id="text"
               placeholder="Enter Role ID"
               autoComplete="off"
               onChange={(e) =>
@@ -87,6 +87,7 @@ const AddManager = () => {
               }
             />
           </div>
+       
 
           <div className="col-12">
             <button type="submit" className="btn btn-primary w-100" onClick={handleClick}>Add Manager</button>

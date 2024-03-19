@@ -1,7 +1,7 @@
 const { Model, DataTypes } = require("sequelize");
 const sequelize = require("../config/connection");
 
-class Employee extends Model { }
+class Employee extends Model {}
 
 Employee.init(
   {
@@ -37,7 +37,7 @@ Employee.init(
       type: DataTypes.INTEGER,
       allowNull: false,
       validate: {
-        len: [4, 10],
+        len: [3, 10],
       },
     },
     is_manager: {
@@ -47,10 +47,10 @@ Employee.init(
     role_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      References: {
+      /*   References: {
         model: "role",
         key: "id",
-      },
+      }, */
     },
     // department_id: {
     //   type: DataTypes.INTEGER,

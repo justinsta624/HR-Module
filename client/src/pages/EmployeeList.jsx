@@ -1,6 +1,6 @@
 import axios from "axios";
 import  { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 
 
@@ -18,17 +18,14 @@ import { Link, useNavigate } from "react-router-dom";
         });
     }, []);
 
-const navigate = useNavigate()
+
 
   const handleDelete = (id) => {
-    axios.delete(`api/employees/${id}`)
-    .then(result => {
-        if(result.data.Status) {
-          navigate("/employees");
-        } else {
-            console.log(result.data.Error)
-        }
-    })
+    if(window.confirm("Are You Sure")) {
+      axios.delete(`api/employees/${id}`);
+      window.confirm("Deleted");
+      window.location.reload()
+    }
   } 
 
   return (

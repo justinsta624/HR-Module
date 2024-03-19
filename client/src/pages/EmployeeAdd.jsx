@@ -1,5 +1,5 @@
 import axios from "axios";
-import { /*useEffect,*/ useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 
@@ -9,8 +9,8 @@ const AddEmployee = () => {
     last_name:'',
     email:'',
     salary:'',
-    manager:'',
-    role_id:''
+    is_manager:"",
+    role_id:'',
   });
 
   const navigate = useNavigate()
@@ -82,7 +82,7 @@ const AddEmployee = () => {
 
             <label htmlFor="inputSalary" className="form-label">Salary</label>
             <input
-              type="text"
+              type="number"
               className="form-control rounded-0"
               id="inputSalary"
               placeholder="Enter Salary"
@@ -97,13 +97,13 @@ const AddEmployee = () => {
             <label htmlFor="inputManager" className="form-label">Manager</label>
             
             <input
-              type="number"
+              type="text"
               className="form-control rounded-0"
               id="inputManager"
               placeholder="Input 0 or 1"
               autoComplete="off"
               onChange={(e) =>
-                setEmployee({ ...employees, salary: e.target.value })
+                setEmployee({ ...employees, is_manager: e.target.value })
               }
             />
           </div> 
