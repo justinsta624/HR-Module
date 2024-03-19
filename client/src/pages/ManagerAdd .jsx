@@ -8,36 +8,31 @@ const AddManager = () => {
     first_name:'',
     last_name:'',
     email:'',
-    role:'',
+    role_id:'',
   });
  
   const navigate = useNavigate()
 
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    const formData = new FormData();
-    formData.append('first_name', managers.first_name);
-    formData.append('last_name', managers.last_name);
-    formData.append('email', managers.email);
-    //formData.append('role', roles.id);
-
-    axios.post('/api/managers/', formData)
-    .then(result => {
-        if(result.data.Status) {
-            navigate('/managers')
-        } else {
-            console.log(result.data.Error)
-        }
-    })
-    .catch(err => console.log(err))
-  }
+  const handleChange = (e) => {
+    setManager((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+ 
+  const handleClick = async (e) => {
+    e.preventDefault();
+    try {
+      await axios.post("/api/managers/", managers);
+      navigate("/managers");
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <div className="d-flex justify-content-center align-items-center mt-3">
       <div className="p-3 rounded w-50 border">
         <h3 className="text-center">Add Manager</h3>
-        <form className="row g-1" onSubmit={handleSubmit}>
+        <form className="row g-1" onSubmit={handleChange}>
           
           <div className="col-12">
             <label htmlFor="inputName" className="form-label"> First Name</label>
@@ -65,8 +60,6 @@ const AddManager = () => {
             />
           </div>
 
-
-
           <div className="col-12">
             <label htmlFor="inputEmail4" className="form-label">Email</label>
             <input
@@ -81,16 +74,22 @@ const AddManager = () => {
             />
           </div>
 
-{/* TO DO 
-
-
-figure it out that do we need role ID or role title   
-
-
-            */ }
+          <div className="col-12">
+            <label htmlFor="inputText" className="form-label">Role ID</label>
+            <input
+              type="text"
+              className="form-control rounded-0"
+              id="inputEmail4"
+              placeholder="Enter Role ID"
+              autoComplete="off"
+              onChange={(e) =>
+                setManager({ ...managers, role_id: e.target.value })
+              }
+            />
+          </div>
 
           <div className="col-12">
-            <button type="submit" className="btn btn-primary w-100">Add Manager</button>
+            <button type="submit" className="btn btn-primary w-100" onClick={handleClick}>Add Manager</button>
           </div>
         </form>
       </div>

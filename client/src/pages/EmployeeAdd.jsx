@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { /*useEffect,*/ useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 
@@ -10,51 +10,32 @@ const AddEmployee = () => {
     email:'',
     salary:'',
     manager:'',
-    role:'',
+    role_id:''
   });
-  const [roles, setRole] = useState([]);
+
   const navigate = useNavigate()
 
-  useEffect(() => {
-    axios
-      .get("api/roles")
-      .then((result) => {
-        if (result.data.Status) {
-            setRole(result.data.Result);
-        } else {
-          console.log(result.data.Error);
-        }
-      })
-      .catch((err) => console.log(err));
-  }, []);
-
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    const formData = new FormData();
-    formData.append('first_name', employees.first_name);
-    formData.append('last_name', employees.last_name);
-    formData.append('email', employees.email);
-    formData.append('salary', employees.salary);
-    formData.append('manager', employees.is_manager);
-    formData.append('role', roles.id);
-
-    axios.post('/api/employees/add', formData)
-    .then(result => {
-        if(result.data.Status) {
-            navigate('/employees')
-        } else {
-            console.log(result.data.Error)
-        }
-    })
-    .catch(err => console.log(err))
-  }
+  const handleChange = (e) => {
+    setEmployee((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+ 
+  const handleClick = async (e) => {
+    e.preventDefault();
+    try {
+      await axios.post("/api/employees/", employees);
+      navigate("/employees");
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <div className="d-flex justify-content-center align-items-center mt-3">
       <div className="p-3 rounded w-50 border">
         <h3 className="text-center">Add Employee</h3>
-        <form className="row g-1" onSubmit={handleSubmit}>
-          
+        <form className="row g-1" onSubmit={handleChange}>
+
+       
           <div className="col-12">
             <label htmlFor="inputName" className="form-label"> First Name</label>
             <input
@@ -111,16 +92,39 @@ const AddEmployee = () => {
               }
             />
           </div>  
-{/* TO DO 
+          <div className="col-12">
 
-
-find a solution for manager is true or false situation and figure it out that do we need role ID or role title   
-
-
-            */ }
+            <label htmlFor="inputManager" className="form-label">Manager</label>
+            
+            <input
+              type="number"
+              className="form-control rounded-0"
+              id="inputManager"
+              placeholder="Input 0 or 1"
+              autoComplete="off"
+              onChange={(e) =>
+                setEmployee({ ...employees, salary: e.target.value })
+              }
+            />
+          </div> 
 
           <div className="col-12">
-            <button type="submit" className="btn btn-primary w-100">Add Employee</button>
+
+            <label htmlFor="inputRole" className="form-label">Role ID</label>
+            <input
+              type="number"
+              className="form-control rounded-0"
+              id="inputRole"
+              placeholder="Enter Role ID"
+              autoComplete="off"
+              onChange={(e) =>
+                setEmployee({ ...employees, role_id: e.target.value })
+              }
+            />
+          </div>           
+
+          <div className="col-12">
+            <button type="submit" className="btn btn-primary w-100" onClick={handleClick}>Add Employee</button>
           </div>
         </form>
       </div>
