@@ -1,6 +1,6 @@
 import axios from "axios";
 import  { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function ManagerList() {
   const [managers, setManager] = useState([]);
@@ -15,12 +15,13 @@ function ManagerList() {
       });
   }, []);
 
-
+  const navigate = useNavigate()
+  
   const handleDelete = (id) => {
-    axios.delete('api/managers'+id)
+    axios.delete(`api/managers/${id}`)
     .then(result => {
         if(result.data.Status) {
-            window.location.reload()
+          navigate("/employees");
         } else {
             console.log(result.data.Error)
         }
@@ -36,6 +37,7 @@ function ManagerList() {
         <table className="table">
           <thead>
             <tr>
+              <th>ID</th>              
               <th>First Name</th>
               <th>Last Name</th>
               <th>Email</th>
@@ -46,6 +48,7 @@ function ManagerList() {
           <tbody>
             {managers.map((manager) => (
               <tr key={manager.id}>
+                <td>{manager.id}</td>               
                 <td>{manager.first_name}</td>
                 <td>{manager.last_name}</td>                
                 <td>{manager.email}</td>

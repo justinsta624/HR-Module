@@ -1,48 +1,36 @@
 import axios from "axios";
-import { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import  { useState } from "react";
+import {  useNavigate } from "react-router-dom";
 
 
 const AddRole = () => {
-  const { id } = useParams();
   const [roles, setRole] = useState({
-    title:'',
+    title:"",
+    department_id: "",
   });
 
   const navigate = useNavigate()
-  useEffect(() => {
-    if(id && id !== 'add') {
-      axios.get('/api/roles/'+id)
-      .then(result => {
-        setRole(result.data)
-      })
-      .catch(err => console.log(err))
+
+
+  const handleChange = (e) => {
+    setRole((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+ 
+  const handleClick = async (e) => {
+    e.preventDefault();
+    try {
+      await axios.post("/api/roles/", roles);
+      navigate("/roles");
+    } catch (err) {
+      console.log(err);
     }
-  }, [id])
-
-
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    const formData = new FormData();
-    formData.append('title', roles.title);
-
-
-    axios.post('/api/roles/', formData)
-    .then(result => {
-        if(result.data.Status) {
-            navigate('/roles')
-        } else {
-            console.log(result.data.Error)
-        }
-    })
-    .catch(err => console.log(err))
-  }
+  };
 
   return (
     <div className="d-flex justify-content-center align-items-center mt-3">
       <div className="p-3 rounded w-50 border">
         <h3 className="text-center">Add Role</h3>
-        <form className="row g-1" onSubmit={handleSubmit}>
+        <form className="row g-1" onSubmit={handleChange}>
           
           <div className="col-12">
             <label htmlFor="inputName" className="form-label"> Role Title</label>
@@ -50,20 +38,34 @@ const AddRole = () => {
               type="text"
               className="form-control rounded-0"
               id="inputName"
-              placeholder="Enter Role"
-              value={roles.title}
+              placeholder="Enter Role Name"
               onChange={(e) =>
                 setRole({ ...roles, title: e.target.value })
               }
             />
           </div>
+
           <div className="col-12">
-            <button type="submit" className="btn btn-primary w-100">Add Role</button>
+            <label htmlFor="inputName" className="form-label"> Department ID </label>
+            <input
+              type="text"
+              className="form-control rounded-0"
+              id="inputName"
+              placeholder="Enter Department ID"
+              onChange={(e) =>
+                setRole({ ...roles, department_id: e.target.value })
+              }
+            />
+          </div>          
+
+          <div className="col-12">
+            <button type="submit" className="btn btn-primary w-100" onClick={handleClick}>Add Department</button>
           </div>
         </form>
       </div>
     </div>
   );
 };
+
 
 export default AddRole;

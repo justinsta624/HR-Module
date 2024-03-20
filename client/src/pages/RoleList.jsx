@@ -1,9 +1,12 @@
+import { useEffect } from "react";
+import { useState } from "react";
 import axios from "axios";
-import  { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function RoleList() {
   const [roles, setRoles] = useState([]);
+
+  const navigate = useNavigate()
 
   useEffect(() => {
     axios.get('/api/roles')
@@ -11,21 +14,19 @@ function RoleList() {
         setRoles(response.data);
       })
       .catch(error => {
-        console.error('Error fetching roles:', error);
+        console.error('Error fetching departments:', error);
       });
   }, []);
 
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete("api/roles/"+id);
+      navigate("/roles");
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
-  const handleDelete = (id) => {
-    axios.delete('api/roles'+id)
-    .then(result => {
-        if(result.data.Status) {
-            window.location.reload()
-        } else {
-            alert(result.data.Error)
-        }
-    })
-  } 
   return (
     <div className="px-5 mt-3">
       <div className="d-flex justify-content-center">
@@ -38,6 +39,7 @@ function RoleList() {
             <tr>
               <th>Role Id</th>
               <th>Role Title</th>
+              <th>Department ID</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -45,7 +47,8 @@ function RoleList() {
             {roles.map((role) => (
               <tr key={role.id}>
                 <td>{role.id}</td>
-                <td>{role.title}</td>                
+                <td>{role.title}</td>  
+                <td>{role.department_id}</td>  
                 <td>
                   <Link  to={`/roles/` + role.id}  className="btn btn-info btn-sm me-2">Edit</Link>
                   <button  className="btn btn-warning btn-sm"  onClick={() => handleDelete(role.id)}>Delete</button>

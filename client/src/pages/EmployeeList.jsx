@@ -1,6 +1,9 @@
 import axios from "axios";
 import  { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
+
+
 
   function EmployeeList() {
     const [employees, setEmployee] = useState([]);
@@ -15,16 +18,19 @@ import { Link } from "react-router-dom";
         });
     }, []);
 
+const navigate = useNavigate()
+
   const handleDelete = (id) => {
-    axios.delete('api/employees'+id)
+    axios.delete(`api/employees/${id}`)
     .then(result => {
         if(result.data.Status) {
-            window.location.reload()
+          navigate("/employees");
         } else {
-            alert(result.data.Error)
+            console.log(result.data.Error)
         }
     })
   } 
+
   return (
     <div className="px-5 mt-3">
       <div className="d-flex justify-content-center">
@@ -35,6 +41,7 @@ import { Link } from "react-router-dom";
         <table className="table">
           <thead>
             <tr>
+              <th>ID</th>             
               <th>First Name</th>
               <th>Last Name</th>
               <th>Email</th>
@@ -46,6 +53,7 @@ import { Link } from "react-router-dom";
           <tbody>
             {employees.map((employee) => (
               <tr key={employee.id}>
+                <td>{employee.id}</td>                
                 <td>{employee.first_name}</td>
                 <td>{employee.last_name}</td>                
                 <td>{employee.email}</td>
