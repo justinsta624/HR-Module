@@ -26,6 +26,10 @@ const Login = () => {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   };
 
+  const handleInvalidEmail = () => {
+    setEmailError(!email ? 'Email is required' : !isValidEmail(email) ? 'Invalid email address' : '');
+  };
+
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     setSubmitting(true);
@@ -73,6 +77,7 @@ const Login = () => {
             placeholder="Email"
             value={email}
             onChange={handleEmailChange}
+            onBlur={handleInvalidEmail}
           />
           {emailError && <div className="text-danger">{emailError}</div>}
         </div>
@@ -84,6 +89,7 @@ const Login = () => {
             placeholder="Password"
             value={password}
             onChange={handlePasswordChange}
+            onBlur={handlePasswordChange}
           />
           {passwordError && <div className="text-danger">{passwordError}</div>}
         </div>
