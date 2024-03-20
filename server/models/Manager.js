@@ -36,7 +36,7 @@ Manager.init(
     role_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      references: {
+      References: {
         model: "role",
         key: "id",
       },

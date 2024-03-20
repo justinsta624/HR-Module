@@ -1,6 +1,6 @@
 import axios from "axios";
 import  { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function ManagerList() {
   const [managers, setManager] = useState([]);
@@ -15,18 +15,14 @@ function ManagerList() {
       });
   }, []);
 
-  const navigate = useNavigate()
-  
   const handleDelete = (id) => {
-    axios.delete(`api/managers/${id}`)
-    .then(result => {
-        if(result.data.Status) {
-          navigate("/employees");
-        } else {
-            console.log(result.data.Error)
-        }
-    })
-  } 
+    if(window.confirm("Are You Sure")) {
+      axios.delete(`api/managers/${id}`);
+      window.confirm("Deleted");
+      window.location.reload()
+    }
+  }   
+
   return (
     <div className="px-5 mt-3">
       <div className="d-flex justify-content-center">

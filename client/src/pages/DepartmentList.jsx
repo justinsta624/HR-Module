@@ -45,14 +45,13 @@ function DepartmentList() {
       });
   }, [navigate]);
 
-  const handleDelete = async (id) => {
-    try {
-      await axios.delete(`api/departments/${id}`);
-      navigate("/departments");
-    } catch (err) {
-      console.log(err);
+  const handleDelete = (id) => {
+    if(window.confirm("Are You Sure")) {
+      axios.delete(`api/departments/${id}`);
+      window.confirm("Deleted");
+      window.location.reload()
     }
-  };
+  } 
 
   // If loading, show loading indicator
   if (isLoading) {

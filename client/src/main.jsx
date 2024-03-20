@@ -8,15 +8,24 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import App from './App.jsx';
 //import Navbar from './components/Navbar';
 import DepartmentList from './pages/DepartmentList';
+import DepartmentAdd from './pages/DepartmentAdd';
+import DepartmentEdit from './pages/DepartmentEdit';
+
 import RoleList from './pages/RoleList';
+import RoleAdd from './pages/RoleAdd';
+import RoleEdit from './pages/RoleEdit';
+
 import EmployeeList from './pages/EmployeeList';
 import EmployeeAdd from './pages/EmployeeAdd';
+import EmployeeEdit from './pages/EmployeeEdit';
+
 import ManagerList from './pages/ManagerList';
-import DepartmentAdd from './pages/DepartmentAdd';
-import RoleAdd from './pages/RoleAdd';
+import ManagerAdd from './pages/ManagerAdd';
+import ManagerEdit from './pages/ManagerEdit';
+
 import ErrorPage from './pages/ErrorPage';
 import LoginPage from './pages/LoginPage';
-import ManagerAdd from './pages/ManagerAdd .jsx';
+
 
 const router = createBrowserRouter([
   {
@@ -33,16 +42,16 @@ const router = createBrowserRouter([
         element: <DepartmentList />,
       },
       {
+        path: '/departments/add',
+        element: <DepartmentAdd />,
+      },
+      {
+        path: '/departments/:id',
+        element: <DepartmentEdit />,
+      },      
+      {
         path: '/employees',
         element: <EmployeeList />,
-      },
-      {
-        path: '/managers',
-        element: <ManagerList />,
-      },
-      {
-        path: '/roles',
-        element: <RoleList />,
       },
       {
         path: '/employees/add',
@@ -50,23 +59,11 @@ const router = createBrowserRouter([
       },
       {
         path: '/employees/:id',
-        element: <EmployeeAdd />,
-      },
+        element: <EmployeeEdit />,
+      },       
       {
-        path: '/departments/add',
-        element: <DepartmentAdd />,
-      },
-      {
-        path: '/departments/:id',
-        element: <DepartmentAdd />,
-      },
-      {
-        path: '/roles/add',
-        element: <RoleAdd />,
-      },
-      {
-        path: '/roles/:id',
-        element: <RoleAdd />,
+        path: '/managers',
+        element: <ManagerList />,
       },
       {
         path: '/managers/add',
@@ -74,8 +71,20 @@ const router = createBrowserRouter([
       },  
       {
         path: '/managers/:id',
-        element: <ManagerAdd />,
-      },  
+        element: <ManagerEdit />,
+      },        
+      {
+        path: '/roles',
+        element: <RoleList />,
+      },
+      {
+        path: '/roles/add',
+        element: <RoleAdd />,
+      },
+      {
+        path: '/roles/:id',
+        element: <RoleEdit />,
+      },
     ]
   }
 ]);
