@@ -1,11 +1,12 @@
 import LoginForm from "../components/LoginForm";
 import SignupForm from "../components/SignupForm";
+import "../styles/LoginPage.css";
 
 const LoginPage = () => {
   return (
-    <div className="login-main row-fluid d-flex justify-content-center">
-      <div className="col-md-3 text-center m-4">
-        <h2>Please Login / Sign Up</h2>
+    <div className="login-main d-flex justify-content-center align-items-center login-background">
+      <div className="text-center col-md-4 card m-3 p-3 login-card">
+        <h2 className="login-header">Please Login / Sign Up</h2>
         <hr />
         <LoginForm />
         <SignupForm />
