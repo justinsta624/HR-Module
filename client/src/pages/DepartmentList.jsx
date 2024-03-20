@@ -1,25 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import Auth from '../utils/auth'; // Importing the Auth service
-
-// Higher-order component for authentication check
-const withAuth = (WrappedComponent) => {
-  return (props) => {
-    const navigate = useNavigate();
-
-    useEffect(() => {
-      // Check if user is logged in
-      if (!Auth.loggedIn()) {
-        // If user is not logged in, redirect to login page
-        navigate('/');
-      }
-    }, [navigate]);
-
-    // Render the wrapped component if user is logged in
-    return Auth.loggedIn() ? <WrappedComponent {...props} /> : null;
-  };
-};
+import Auth from '../utils/auth';
+import withAuth from '../components/Auth';
 
 function DepartmentList() {
   const [departments, setDepartments] = useState([]);
