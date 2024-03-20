@@ -30,9 +30,16 @@ function DepartmentList() {
 
   const handleDelete = (id) => {
     if (window.confirm('Are You Sure')) {
-      axios.delete(`api/departments/${id}`);
-      window.confirm('Deleted');
-      window.location.reload();
+      axios.delete(`api/departments/${id}`)
+        .then(() => {
+          // Remove the deleted department from the state
+          setDepartments(departments => departments.filter(department => department.id !== id));
+          window.alert('Deleted');
+        })
+        .catch(error => {
+          console.error('Error deleting department:', error);
+          window.alert('Failed to delete department. Please try again later.');
+        });
     }
   };
 
