@@ -46,7 +46,6 @@ const Signup = () => {
 
     if (username && signupEmail && signupPassword) {
       try {
-        console.log('Request Payload:', { username, email: signupEmail, password: signupPassword });
         const response = await axios.post('/api/users/signup', { username, email: signupEmail, password: signupPassword });
 
         if (response.status === 200) {

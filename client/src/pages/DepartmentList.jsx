@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import Auth from '../utils/auth'; // Importing the Auth service
 
 // Higher-order component for authentication check
@@ -46,12 +46,12 @@ function DepartmentList() {
   }, [navigate]);
 
   const handleDelete = (id) => {
-    if(window.confirm("Are You Sure")) {
+    if (window.confirm('Are You Sure')) {
       axios.delete(`api/departments/${id}`);
-      window.confirm("Deleted");
-      window.location.reload()
+      window.confirm('Deleted');
+      window.location.reload();
     }
-  } 
+  };
 
   // If loading, show loading indicator
   if (isLoading) {
@@ -59,18 +59,18 @@ function DepartmentList() {
   }
 
   return (
-    <div className="px-5 mt-3">
-      <div className="d-flex justify-content-center">
+    <div className='px-5 mt-3'>
+      <div className='d-flex justify-content-center'>
         <h3>Departments List</h3>
       </div>
-      <Link to="add" className="btn btn-success"> Add Department</Link> 
-      <div className="mt-3">
-        <table className="table">
+      <Link to='add' className='btn btn-success'> Add Department</Link>
+      <div className='mt-3'>
+        <table className='table'>
           <thead>
             <tr>
               <th>Id</th>
               <th>Department Name</th>
-              <th>User Id</th>              
+              <th>User Id</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -78,11 +78,11 @@ function DepartmentList() {
             {departments.map((department) => (
               <tr key={department.id}>
                 <td>{department.id}</td>
-                <td>{department.name}</td>   
-                <td>{department.user_id}</td>                             
+                <td>{department.name}</td>
+                <td>{department.user_id}</td>
                 <td>
-                  <Link to={`/departments/` + department.id} className="btn btn-info btn-sm me-2">Edit</Link>
-                  <button className="btn btn-warning btn-sm" onClick={() => handleDelete(department.id)}>Delete</button>
+                  <Link to={`/departments/` + department.id} className='btn btn-info btn-sm me-2'>Edit</Link>
+                  <button className='btn btn-warning btn-sm' onClick={() => handleDelete(department.id)}>Delete</button>
                 </td>
               </tr>
             ))}
