@@ -5,8 +5,9 @@ import Auth from '../utils/auth';
 import withAuth from '../components/Auth';
 
 function EmployeeList() {
-  const [employees, setEmployee] = useState([]);
+  const [employees, setEmployees] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const navigate = useNavigate(); // Added navigate from useNavigate()
 
   useEffect(() => {
     if (!Auth.loggedIn()) {
@@ -16,20 +17,27 @@ function EmployeeList() {
 
     axios.get('/api/employees')
       .then(response => {
-        setEmployee(response.data);
+        setEmployees(response.data);
         setIsLoading(false);
       })
       .catch(error => {
         console.error('Error fetching employees:', error);
         setIsLoading(false);
       });
-  }, []);
+  }, [navigate]); // Added navigate as dependency to useEffect
 
   const handleDelete = (id) => {
     if (window.confirm('Are You Sure')) {
-      axios.delete(`api/employees/${id}`);
-      window.confirm('Deleted');
-      window.location.reload();
+      axios.delete(`api/employees/${id}`)
+        .then(() => {
+          // Remove the deleted employee from the state
+          setEmployees(employees => employees.filter(employee => employee.id !== id));
+          window.alert('Deleted');
+        })
+        .catch(error => {
+          console.error('Error deleting employee:', error);
+          window.alert('Failed to delete employee. Please try again later.');
+        });
     }
   };
 

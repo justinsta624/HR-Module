@@ -7,6 +7,7 @@ import withAuth from '../components/Auth';
 function RoleList() {
   const [roles, setRoles] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const navigate = useNavigate(); // Added navigate from useNavigate()
 
   useEffect(() => {
     if (!Auth.loggedIn()) {
@@ -23,13 +24,20 @@ function RoleList() {
         console.error('Error fetching departments:', error);
         setIsLoading(false);
       });
-  }, []);
+  }, [navigate]); // Added navigate as dependency to useEffect
 
   const handleDelete = (id) => {
     if (window.confirm('Are You Sure')) {
-      axios.delete(`api/roles/${id}`);
-      window.confirm('Deleted');
-      window.location.reload();
+      axios.delete(`api/roles/${id}`)
+        .then(() => {
+          // Remove the deleted role from the state
+          setRoles(roles => roles.filter(role => role.id !== id));
+          window.alert('Deleted');
+        })
+        .catch(error => {
+          console.error('Error deleting role:', error);
+          window.alert('Failed to delete role. Please try again later.');
+        });
     }
   };
 

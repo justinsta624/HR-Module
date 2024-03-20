@@ -32,7 +32,7 @@ router.get(
         include: [
           {
             model: Role,
-            attributes: ["title", "salary"],
+            attributes: ["title"],
             include: [
               { model: Employee, attributes: ["first_name", "last_name"] },
             ],

@@ -7,6 +7,7 @@ import withAuth from '../components/Auth';
 function ManagerList() {
   const [managers, setManagers] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const navigate = useNavigate(); // Added navigate from useNavigate()
 
   useEffect(() => {
     if (!Auth.loggedIn()) {
@@ -23,13 +24,20 @@ function ManagerList() {
         console.error('Error fetching managers:', error);
         setIsLoading(false);
       });
-  }, []);
+  }, [navigate]); // Added navigate as dependency to useEffect
 
   const handleDelete = (id) => {
     if (window.confirm('Are You Sure')) {
-      axios.delete(`api/managers/${id}`);
-      window.confirm('Deleted');
-      window.location.reload();
+      axios.delete(`api/managers/${id}`)
+        .then(() => {
+          // Remove the deleted manager from the state
+          setManagers(managers => managers.filter(manager => manager.id !== id));
+          window.alert('Deleted');
+        })
+        .catch(error => {
+          console.error('Error deleting manager:', error);
+          window.alert('Failed to delete manager. Please try again later.');
+        });
     }
   };
 
