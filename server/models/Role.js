@@ -13,17 +13,17 @@ Role.init(
     },
     title: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
       validate: {
         len: [1, 30],
       },
     },
     department_id: {
       type: DataTypes.INTEGER,
-      /*     references: {
+      references: {
         model: "department",
         key: "id",
-      }, */
+      },
     },
   },
   {

@@ -47,10 +47,10 @@ Employee.init(
     role_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      /*   References: {
+      References: {
         model: "role",
         key: "id",
-      }, */
+      },
     },
     // department_id: {
     //   type: DataTypes.INTEGER,
