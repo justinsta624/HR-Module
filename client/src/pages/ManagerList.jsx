@@ -2,20 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Auth from '../utils/auth';
-
-const withAuth = (WrappedComponent) => {
-  return (props) => {
-    const navigate = useNavigate();
-
-    useEffect(() => {
-      if (!Auth.loggedIn()) {
-        navigate('/');
-      }
-    }, [navigate]);
-
-    return Auth.loggedIn() ? <WrappedComponent {...props} /> : null;
-  };
-};
+import withAuth from '../components/Auth';
 
 function ManagerList() {
   const [managers, setManagers] = useState([]);
