@@ -103,7 +103,7 @@ function EmployeeList() {
                 <td>{employee.last_name}</td>
                 <td>{employee.email}</td>
                 <td>{employee.salary}</td>
-                <td>{employee.role_id}</td>
+                <td>{employee.role.title}</td>
                 <td>
                   <Link to={`/employees/` + employee.id} className='btn btn-info btn-sm me-2'>Edit</Link>
                   <button className='btn btn-warning btn-sm' onClick={() => handleDelete(employee.id)}>Delete</button>

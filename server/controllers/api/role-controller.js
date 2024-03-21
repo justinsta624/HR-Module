@@ -1,14 +1,14 @@
 const router = require('express').Router();
-const { Role, Employee } = require('../../models');
+const { Role, Employee, Department } = require('../../models');
 const withAuth = require('../../utils/auth');
 
 // GET all roles
 router.get('/', /*withAuth,*/ async (req, res) => {
   try {
     const roleData = await Role.findAll(
-      // {
-      //   include: [{ model: Employee, attributes: ['first_name', 'last_name'] }]
-      // }
+      {
+        include: [{ model: Department, attributes: ['name'] }]
+      }
     );
     res.status(200).json(roleData);
   } catch (err) {

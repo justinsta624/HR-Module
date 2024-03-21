@@ -6,11 +6,11 @@ const withAuth = require('../../utils/auth'); // Import the withAuth middleware
 router.get('/', /*withAuth,*/ async (req, res) => {
   try {
     const employeeData = await Employee.findAll(
-      // {
-      //   include: [{
-      //     model: Role, attributes: ['title', 'salary'], include: [{ model: Department, attributes: ['name'] }]
-      //   }]
-      // }
+      {
+        include: [{
+          model: Role, attributes: ['title'], include: [{ model: Department, attributes: ['name'] }]
+        }]
+      }
     );
     res.status(200).json(employeeData);
   } catch (err) {
