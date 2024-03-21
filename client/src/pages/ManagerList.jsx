@@ -79,7 +79,7 @@ function ManagerList() {
   return (
     <div className='px-5 mt-3'>
       <div className='d-flex justify-content-center'>
-        <h3>Manager List</h3>
+        <h2>Manager List</h2>
       </div>
       <Link to='add' className='btn btn-success'> Add Manager</Link>
       <div className='mt-3'>
