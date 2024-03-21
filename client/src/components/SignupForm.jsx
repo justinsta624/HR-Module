@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import axios from 'axios';
-import Auth from '../utils/auth'; // Importing the Auth service
+import Auth from '../utils/auth';
 
 const Signup = () => {
   const [username, setUsername] = useState('');
@@ -10,6 +10,7 @@ const Signup = () => {
   const [signupEmailError, setSignupEmailError] = useState('');
   const [signupPasswordError, setSignupPasswordError] = useState('');
   const [signupSubmitStatus, setSignupSubmitStatus] = useState('');
+  const [submitting, setSubmitting] = useState(false);
 
   const handleUsernameChange = (e) => {
     const newUsername = e.target.value;
@@ -29,6 +30,10 @@ const Signup = () => {
     setSignupPasswordError(!newPassword ? 'Password is required' : '');
   };
 
+  const handleInvalidPassword = (e) => {
+    setSignupPasswordError(!signupPassword ? 'Password is required' : signupPassword.length < 8 ? 'Password must be at least 8 characters' : '');
+  };
+
   const isValidEmail = (email) => {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   };
@@ -39,6 +44,7 @@ const Signup = () => {
 
   const handleSignupFormSubmit = async (e) => {
     e.preventDefault();
+    setSubmitting(true);
 
     setUsernameError(!username ? 'Name is required' : '');
     setSignupEmailError(!signupEmail ? 'Email is required' : !isValidEmail(signupEmail) ? 'Invalid email address' : '');
@@ -49,64 +55,81 @@ const Signup = () => {
         const response = await axios.post('/api/users/signup', { username, email: signupEmail, password: signupPassword });
 
         if (response.status === 200) {
-          setSignupSubmitStatus('Signup successful');
-          // Redirect the user to another page or update UI as needed
-          Auth.login(response.data.token);
+          const { token, user } = response.data;
+
+          if (user && Object.keys(user).length !== 0) {
+            setSignupSubmitStatus('Signup successful');
+            Auth.login(user);
+          } else {
+            setSignupSubmitStatus('User data is invalid');
+          }
         } else {
           setSignupSubmitStatus('Signup failed');
         }
       } catch (error) {
-        setSignupSubmitStatus('An error occurred during signup');
-        console.error('An error occurred during signup', error);
+        if (error.response && error.response.status === 400) {
+          setSignupSubmitStatus('Invalid email or password');
+        } else {
+          setSignupSubmitStatus('An error occurred');
+        }
+        console.error('An error occurred', error);
       }
     }
+
+    setSubmitting(false);
   };
 
   return (
-    <div className="signup-container">
-      <h2 className="">Sign Up</h2>
-      <form className="form signup-form" onSubmit={handleSignupFormSubmit}>
-        <div className="mb-3">
+    <div className='signup-container'>
+      <h2 className=''>Sign Up</h2>
+      <form className='form signup-form' onSubmit={handleSignupFormSubmit}>
+        <div className='mb-3'>
           <input
-            className="form-control"
-            type="text"
-            id="name-signup"
-            placeholder="Name"
+            className='form-control'
+            type='text'
+            id='name-signup'
+            placeholder='Name'
             value={username}
             onChange={handleUsernameChange}
             onBlur={handleUsernameChange}
           />
-          {usernameError && <div className="text-danger">{usernameError}</div>}
+          {usernameError && <div className='text-danger'>{usernameError}</div>}
         </div>
-        <div className="mb-3">
+        <div className='mb-3'>
           <input
-            className="form-control"
-            type="text"
-            id="email-signup"
-            placeholder="Email"
+            className='form-control'
+            type='text'
+            id='email-signup'
+            placeholder='Email'
             value={signupEmail}
             onChange={handleSignupEmailChange}
             onBlur={handleInvalidEmail}
           />
-          {signupEmailError && <div className="text-danger">{signupEmailError}</div>}
+          {signupEmailError && <div className='text-danger'>{signupEmailError}</div>}
         </div>
-        <div className="mb-3">
+        <div className='mb-3'>
           <input
-            className="form-control"
-            type="password"
-            id="password-signup"
-            placeholder="Password (minimum 8 characters)"
+            className='form-control'
+            type='password'
+            id='password-signup'
+            placeholder='Password (minimum 8 characters)'
             value={signupPassword}
             onChange={handleSignupPasswordChange}
-            onBlur={handleSignupPasswordChange}
+            onBlur={handleInvalidPassword}
           />
-          {signupPasswordError && <div className="text-danger">{signupPasswordError}</div>}
+          {signupPasswordError && <div className='text-danger'>{signupPasswordError}</div>}
         </div>
-        <div className="mb-3">
-          <button className="btn btn-dark" type="submit">Sign Up</button>
+        <div className='mb-3'>
+          <button className='btn btn-dark' type='submit' disabled={submitting}>
+            {submitting ? 'Signing Up...' : 'Sign Up'}
+          </button>
         </div>
       </form>
-      {signupSubmitStatus && <div className="mt-3 alert alert-danger">{signupSubmitStatus}</div>}
+      {signupSubmitStatus && (
+        <div className={`mt-3 alert ${signupSubmitStatus.includes('successful') ? 'alert-success' : 'alert-danger'}`}>
+          {signupSubmitStatus}
+        </div>
+      )}
     </div>
   );
 };
