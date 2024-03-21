@@ -114,7 +114,7 @@ const UpdateEmployee = () => {
           <label className='form-label'>Role Title:</label>
           <select
             type='number'
-            className='form-control'
+            className='form-select'
             id='role_id'
             placeholder='Enter User ID'
             name='role_id'
