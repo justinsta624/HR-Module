@@ -7,7 +7,9 @@ import withAuth from '../components/Auth';
 function EmployeeList() {
   const [employees, setEmployees] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const navigate = useNavigate(); // Added navigate from useNavigate()
+  const [showModal, setShowModal] = useState(false);
+  const [deleteId, setDeleteId] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!Auth.loggedIn()) {
@@ -24,25 +26,54 @@ function EmployeeList() {
         console.error('Error fetching employees:', error);
         setIsLoading(false);
       });
-  }, [navigate]); // Added navigate as dependency to useEffect
+  }, [navigate]);
 
   const handleDelete = (id) => {
-    if (window.confirm('Are You Sure')) {
-      axios.delete(`api/employees/${id}`)
-        .then(() => {
-          // Remove the deleted employee from the state
-          setEmployees(employees => employees.filter(employee => employee.id !== id));
-          window.alert('Deleted');
-        })
-        .catch(error => {
-          console.error('Error deleting employee:', error);
-          window.alert('Failed to delete employee. Please try again later.');
-        });
-    }
+    setDeleteId(id);
+    setShowModal(true);
+  };
+
+  const confirmDelete = () => {
+    axios.delete(`api/employees/${deleteId}`)
+      .then(() => {
+        setEmployees(employees => employees.filter(employee => employee.id !== deleteId));
+        setShowModal(false);
+      })
+      .catch(error => {
+        console.error('Error deleting employee:', error);
+        setShowModal(false);
+        window.alert('Failed to delete employee. Please try again later.');
+      });
+  };
+
+  const cancelDelete = () => {
+    setShowModal(false);
+  };
+
+  const renderModal = () => {
+    return (
+      <div className="modal" style={{ display: showModal ? 'block' : 'none' }}>
+        <div className="modal-dialog">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title">Confirm Delete</h5>
+              <button type="button" className="btn-close" onClick={cancelDelete}></button>
+            </div>
+            <div className="modal-body">
+              Are you sure you want to delete this employee?
+            </div>
+            <div className="modal-footer">
+              <button type="button" className="btn btn-secondary" onClick={cancelDelete}>Cancel</button>
+              <button type="button" className="btn btn-danger" onClick={confirmDelete}>Delete</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
   };
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <h3 className='text-center m-3'>Loading...</h3>;
   }
 
   return (
@@ -82,6 +113,7 @@ function EmployeeList() {
           </tbody>
         </table>
       </div>
+      {renderModal()}
     </div>
   );
 }
