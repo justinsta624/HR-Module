@@ -3,45 +3,39 @@ const { Manager, Role } = require("../../models");
 const withAuth = require("../../utils/auth");
 
 // GET all managers
-router.get(
-  "/",
-  /*withAuth,*/ async (req, res) => {
-    try {
-      const managerData = await Manager
-        .findAll
-        // {
-        //   include: [{ model: Employee, attributes: ['first_name', 'last_name'] }]
-        // }
-        ();
-      res.status(200).json(managerData);
-    } catch (err) {
-      res.status(500).json(err);
-    }
+router.get("/", withAuth, async (req, res) => {
+  try {
+    const managerData = await Manager.findAll(
+      {
+        include: [{ model: Role, attributes: ["title"] }],
+      }
+    );
+    res.status(200).json(managerData);
+  } catch (err) {
+    res.status(500).json(err);
   }
+}
 );
 
 // GET a single manager
-router.get(
-  "/:id",
-  /*withAuth,*/ async (req, res) => {
-    try {
-      const managerData = await Manager.findByPk(
-        req.params.id
-        // {
-        //   include: [{ model: Employee, attributes: ['first_name', 'last_name'] }]
-        // }
-      );
+router.get("/:id", withAuth, async (req, res) => {
+  try {
+    const managerData = await Manager.findByPk(req.params.id
+      // {
+      //   include: [{ model: Employee, attributes: ['first_name', 'last_name'] }]
+      // }
+    );
 
-      if (!managerData) {
-        res.status(404).json({ message: "No manager found with that id!" });
-        return;
-      }
-
-      res.status(200).json(managerData);
-    } catch (err) {
-      res.status(500).json(err);
+    if (!managerData) {
+      res.status(404).json({ message: "No manager found with that id!" });
+      return;
     }
+
+    res.status(200).json(managerData);
+  } catch (err) {
+    res.status(500).json(err);
   }
+}
 );
 
 // CREATE a manager

@@ -88,7 +88,7 @@ function RoleList() {
             <tr>
               <th>Role Id</th>
               <th>Role Title</th>
-              <th>Department ID</th>
+              <th>Department</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -97,7 +97,7 @@ function RoleList() {
               <tr key={role.id}>
                 <td>{role.id}</td>
                 <td>{role.title}</td>
-                <td>{role.department_id}</td>
+                <td>{role.department.name}</td>
                 <td>
                   <Link to={`/roles/` + role.id} className='btn btn-info btn-sm me-2'>Edit</Link>
                   <button className='btn btn-warning btn-sm' onClick={() => handleDelete(role.id)}>Delete</button>

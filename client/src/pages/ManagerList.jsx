@@ -101,7 +101,7 @@ function ManagerList() {
                 <td>{manager.first_name}</td>
                 <td>{manager.last_name}</td>
                 <td>{manager.email}</td>
-                <td>{manager.role_id}</td>
+                <td>{manager.role.title}</td>
                 <td>
                   <Link to={`/managers/` + manager.id} className='btn btn-info btn-sm me-2'>Edit</Link>
                   <button className='btn btn-warning btn-sm' onClick={() => handleDelete(manager.id)}>Delete</button>
