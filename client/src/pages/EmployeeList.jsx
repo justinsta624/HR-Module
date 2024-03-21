@@ -79,19 +79,19 @@ function EmployeeList() {
   return (
     <div className='px-5 mt-3'>
       <div className='d-flex justify-content-center'>
-        <h3>Employee List</h3>
+        <h2>Employee List</h2>
       </div>
       <Link to='add' className='btn btn-success'> Add Employee</Link>
       <div className='mt-3'>
         <table className='table'>
           <thead>
             <tr>
-              <th>ID</th>
+              <th>Employee ID</th>
               <th>First Name</th>
               <th>Last Name</th>
               <th>Email</th>
-              <th>Salary</th>
               <th>Role</th>
+              <th>Salary</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -102,8 +102,8 @@ function EmployeeList() {
                 <td>{employee.first_name}</td>
                 <td>{employee.last_name}</td>
                 <td>{employee.email}</td>
-                <td>{employee.salary}</td>
                 <td>{employee.role.title}</td>
+                <td>{employee.salary}</td>
                 <td>
                   <Link to={`/employees/` + employee.id} className='btn btn-info btn-sm me-2'>Edit</Link>
                   <button className='btn btn-warning btn-sm' onClick={() => handleDelete(employee.id)}>Delete</button>

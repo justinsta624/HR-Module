@@ -6,10 +6,8 @@ import withAuth from '../components/Auth';
 
 const UpdateRole = () => {
   const { id } = useParams();
-  const [roles, setRole] = useState({
-    title: '',
-    department_id: '',
-  });
+  const [roles, setRoles] = useState([]);
+  const [departments, setDepartments] = useState([]);
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -20,10 +18,26 @@ const UpdateRole = () => {
     if (!Auth.loggedIn()) {
       navigate('/');
     }
+
+    axios.get(`/api/roles/${roleId}`)
+      .then(response => {
+        setRoles(response.data);
+      })
+      .catch(error => {
+        console.error('Error fetching role:', error);
+      });
+
+    axios.get('/api/departments')
+      .then(response => {
+        setDepartments(response.data);
+      })
+      .catch(error => {
+        console.error('Error fetching departments:', error);
+      });
   }, [navigate]);
 
   const handleChange = (e) => {
-    setRole((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    setRoles((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
   const handleClick = async (e) => {
@@ -38,11 +52,11 @@ const UpdateRole = () => {
   };
 
   return (
-    <div className='container'>
-      <h1>Edit Role</h1>
+    <div className='container col-md-6 mt-3'>
+      <h2 className='text-center'>Edit Role</h2>
       <form>
         <div className='mb-3 mt-3'>
-          <label className='form-label'> ID:</label>
+          <label className='form-label'>Role ID:</label>
           <input
             type='text'
             className='form-control'
@@ -54,7 +68,7 @@ const UpdateRole = () => {
           />
         </div>
         <div className='mb-3 mt-3'>
-          <label className='form-label'> Title Name: </label>
+          <label className='form-label'>Role Title:</label>
           <input
             type='text'
             className='form-control'
@@ -66,16 +80,21 @@ const UpdateRole = () => {
           />
         </div>
         <div className='mb-3 mt-3'>
-          <label className='form-label'>Department ID:</label>
-          <input
-            type='text'
-            className='form-control'
+          <label className='form-label'>Department:</label>
+          <select
+            className='form-select'
             id='department_id'
-            placeholder='Enter Department ID'
             name='department_id'
             value={roles.department_id}
             onChange={handleChange}
-          />
+          >
+            <option value='' disabled>Select Department</option>
+            {departments.map((department) => (
+              <option key={department.id} value={department.id}>
+                {department.name}
+              </option>
+            ))}
+          </select>
         </div>
         <button type='submit' className='btn btn-primary' onClick={handleClick}>Update</button>
       </form>
@@ -83,4 +102,4 @@ const UpdateRole = () => {
   );
 };
 
-export default withAuth(UpdateRole); // Wrap UpdateRole with withAuth HOC
+export default withAuth(UpdateRole);

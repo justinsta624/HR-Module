@@ -23,7 +23,7 @@ function RoleList() {
         setIsLoading(false);
       })
       .catch(error => {
-        console.error('Error fetching departments:', error);
+        console.error('Error fetching roles:', error);
         setIsLoading(false);
       });
   }, [navigate]);
@@ -42,7 +42,7 @@ function RoleList() {
       .catch(error => {
         console.error('Error deleting role:', error);
         setShowModal(false);
-        window.alert('Failed to delete role. Please try again later.');
+        // window.alert('Failed to delete role. Please try again later.');
       });
   };
 
@@ -79,14 +79,14 @@ function RoleList() {
   return (
     <div className='px-5 mt-3'>
       <div className='d-flex justify-content-center'>
-        <h3>Roles List</h3>
+        <h2>Roles List</h2>
       </div>
       <Link to='add' className='btn btn-success'> Add Role</Link>
       <div className='mt-3'>
         <table className='table'>
           <thead>
             <tr>
-              <th>Role Id</th>
+              <th>Role ID</th>
               <th>Role Title</th>
               <th>Department</th>
               <th>Action</th>
