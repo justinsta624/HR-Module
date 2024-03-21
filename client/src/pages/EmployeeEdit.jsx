@@ -10,23 +10,42 @@ const UpdateEmployee = () => {
     first_name: '',
     last_name: '',
     email: '',
-    salary: '',
-    is_manager: '',
     role_id: '',
+    salary: '',
+    is_manager: false
   });
+  const [roles, setRoles] = useState([]);
 
-  const location = useLocation();
-  const navigate = useNavigate();
   const employeeId = location.pathname.split('/')[2];
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!Auth.loggedIn()) {
       navigate('/');
     }
+
+    axios.get(`/api/employees/${employeeId}`)
+      .then(response => {
+        setEmployee(response.data);
+      })
+      .catch(error => {
+        console.error('Error fetching employee:', error);
+      });
+
+    axios.get('/api/roles')
+      .then(response => {
+        setRoles(response.data);
+      })
+      .catch(error => {
+        console.error('Error fetching roles:', error);
+      });
   }, [navigate]);
 
   const handleChange = (e) => {
-    setEmployee((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    const { name, value, type, checked } = e.target;
+    const newValue = type === 'checkbox' ? checked : value;
+    setEmployee((prev) => ({ ...prev, [name]: newValue }));
   };
 
   const handleClick = async (e) => {
@@ -40,8 +59,8 @@ const UpdateEmployee = () => {
   };
 
   return (
-    <div className='container'>
-      <h1>Edit Employee</h1>
+    <div className='container col-md-6 my-3'>
+      <h2 className='text-center'>Edit Employee</h2>
       <form>
         <div className='mb-3 mt-3'>
           <label className='form-label'>ID:</label>
@@ -92,6 +111,23 @@ const UpdateEmployee = () => {
           />
         </div>
         <div className='mb-3 mt-3'>
+          <label className='form-label'>Role Title:</label>
+          <select
+            type='number'
+            className='form-control'
+            id='role_id'
+            placeholder='Enter User ID'
+            name='role_id'
+            value={employees.role_id}
+            onChange={handleChange}
+          >
+            <option value='' disabled>Select Role</option>
+            {roles.map((role) => (
+              <option key={role.id} value={role.id}>{role.title}</option>
+            ))}
+          </select>
+        </div>
+        <div className='mb-3 mt-3'>
           <label className='form-label'>Salary:</label>
           <input
             type='number'
@@ -105,27 +141,17 @@ const UpdateEmployee = () => {
         </div>
         <div className='mb-3 mt-3'>
           <label className='form-label'>Manager:</label>
-          <input
-            type='text'
-            className='form-control'
-            id='is_manager'
-            placeholder='Enter 0 (zero) or 1 (one)'
-            name='is_manager'
-            value={employees.is_manager}
-            onChange={handleChange}
-          />
-        </div>
-        <div className='mb-3 mt-3'>
-          <label className='form-label'>Role ID:</label>
-          <input
-            type='number'
-            className='form-control'
-            id='role_id'
-            placeholder='Enter User ID'
-            name='role_id'
-            value={employees.role_id}
-            onChange={handleChange}
-          />
+          <div className="form-check">
+            <input
+              type='checkbox'
+              className='form-check-input'
+              id='is_manager'
+              onChange={handleChange}
+              name='is_manager'
+              checked={employees.is_manager}
+            />
+            <label className='form-check-label' htmlFor='is_manager'>Yes</label>
+          </div>
         </div>
         <button type='submit' className='btn btn-primary' onClick={handleClick}>
           Update

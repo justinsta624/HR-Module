@@ -5,11 +5,7 @@ import Auth from '../utils/auth';
 import withAuth from '../components/Auth';
 
 const AddDepartment = () => {
-  const [departments, setDepartment] = useState({
-    name: '',
-    user_id: 1
-  });
-
+  const [departments, setDepartment] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -33,25 +29,23 @@ const AddDepartment = () => {
   };
 
   return (
-    <div className='d-flex justify-content-center align-items-center mt-3'>
-      <div className='p-3 rounded w-50 border'>
-        <h3 className='text-center'>Add Department</h3>
-        <form className='row g-1' onSubmit={handleChange}>
-          <div className='col-12'>
-            <label htmlFor='inputName' className='form-label'> Department Name</label>
-            <input
-              type='text'
-              className='form-control rounded-0'
-              id='inputName'
-              placeholder='Enter Department Name'
-              onChange={(e) => setDepartment({ ...departments, name: e.target.value })}
-            />
-          </div>
-          <div className='col-12'>
-            <button type='submit' className='btn btn-primary w-100' onClick={handleClick}>Add Department</button>
-          </div>
-        </form>
-      </div>
+    <div className='container col-md-6 mt-3'>
+      <h2 className='text-center'>Add Department</h2>
+      <form>
+        <div className='mb-3 mt-3'>
+          <label className='form-label'>Department:</label>
+          <input
+            type='text'
+            className='form-control'
+            id='name'
+            placeholder='Enter Department Name'
+            name='name'
+            value={departments.name}
+            onChange={handleChange}
+          />
+        </div>
+        <button type='submit' className='btn btn-primary' onClick={handleClick}>Add Department</button>
+      </form>
     </div>
   );
 };

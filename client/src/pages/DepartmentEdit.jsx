@@ -6,12 +6,8 @@ import withAuth from '../components/Auth';
 
 const UpdateDepartment = () => {
   const { id } = useParams();
-  const [department, setDepartment] = useState({
-    name: '',
-    user_id: 1,
-  });
+  const [department, setDepartment] = useState([]);
   const navigate = useNavigate();
-
   const location = useLocation();
   const departmentId = location.pathname.split('/')[2];
 
@@ -20,6 +16,14 @@ const UpdateDepartment = () => {
       navigate('/');
       return;
     }
+
+    axios.get(`/api/departments/${departmentId}`)
+      .then(response => {
+        setDepartment(response.data);
+      })
+      .catch(error => {
+        console.error('Error fetching departments:', error);
+      });
   }, [navigate]);
 
   const handleChange = (e) => {
@@ -38,11 +42,11 @@ const UpdateDepartment = () => {
   };
 
   return (
-    <div className='container'>
-      <h1>Edit Department</h1>
+    <div className='container col-md-6 mt-3'>
+      <h2 className='text-center'>Edit Department</h2>
       <form>
         <div className='mb-3 mt-3'>
-          <label className='form-label'> ID:</label>
+          <label className='form-label'>Department ID:</label>
           <input
             type='integer'
             className='form-control'
@@ -54,7 +58,7 @@ const UpdateDepartment = () => {
           />
         </div>
         <div className='mb-3 mt-3'>
-          <label className='form-label'> Department Name: </label>
+          <label className='form-label'>Department:</label>
           <input
             type='text'
             className='form-control'
@@ -62,18 +66,6 @@ const UpdateDepartment = () => {
             placeholder='Enter Department Name'
             name='name'
             value={department.name}
-            onChange={handleChange}
-          />
-        </div>
-        <div className='mb-3 mt-3'>
-          <label className='form-label'>User ID:</label>
-          <input
-            type='text'
-            className='form-control'
-            id='user_id'
-            placeholder='Enter User ID'
-            name='user_id'
-            value={department.user_id}
             onChange={handleChange}
           />
         </div>

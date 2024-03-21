@@ -5,10 +5,8 @@ import Auth from '../utils/auth';
 import withAuth from '../components/Auth';
 
 const AddRole = () => {
-  const [roles, setRole] = useState({
-    title: '',
-    department_id: '',
-  });
+  const [roles, setRole] = useState([]);
+  const [departments, setDepartments] = useState([]);
 
   const navigate = useNavigate();
 
@@ -16,6 +14,14 @@ const AddRole = () => {
     if (!Auth.loggedIn()) {
       navigate('/');
     }
+
+    axios.get('/api/departments')
+      .then(response => {
+        setDepartments(response.data);
+      })
+      .catch(error => {
+        console.error('Error fetching departments:', error);
+      });
   }, [navigate]);
 
   const handleChange = (e) => {
@@ -33,41 +39,42 @@ const AddRole = () => {
   };
 
   return (
-    <div className='d-flex justify-content-center align-items-center mt-3'>
-      <div className='p-3 rounded w-50 border'>
-        <h3 className='text-center'>Add Role</h3>
-        <form className='row g-1' onSubmit={handleClick}>
-          <div className='col-12'>
-            <label htmlFor='inputName' className='form-label'> Role Title</label>
-            <input
-              type='text'
-              className='form-control rounded-0'
-              id='inputName'
-              placeholder='Enter Role Name'
-              name='title'
-              value={roles.title}
-              onChange={handleChange}
-            />
-          </div>
-          <div className='col-12'>
-            <label htmlFor='inputName' className='form-label'> Department ID </label>
-            <input
-              type='text'
-              className='form-control rounded-0'
-              id='inputName'
-              placeholder='Enter Department ID'
-              name='department_id'
-              value={roles.department_id}
-              onChange={handleChange}
-            />
-          </div>
-          <div className='col-12'>
-            <button type='submit' className='btn btn-primary w-100'>Add Role</button>
-          </div>
-        </form>
-      </div>
+    <div className='container col-md-6 mt-3'>
+      <h2 className='text-center'>Add Role</h2>
+      <form>
+        <div className='mb-3 mt-3'>
+          <label className='form-label'>Role Title:</label>
+          <input
+            type='text'
+            className='form-control'
+            id='title'
+            placeholder='Enter Role Title'
+            name='title'
+            value={roles.title}
+            onChange={handleChange}
+          />
+        </div>
+        <div className='mb-3 mt-3'>
+          <label className='form-label'>Department:</label>
+          <select
+            className='form-select'
+            id='department_id'
+            name='department_id'
+            value={roles.department_id}
+            onChange={handleChange}
+          >
+            <option value='' disabled selected>Select Department</option>
+            {departments.map((department) => (
+              <option key={department.id} value={department.id}>
+                {department.name}
+              </option>
+            ))}
+          </select>
+        </div>
+        <button type='submit' className='btn btn-primary' onClick={handleClick}>Add Role</button>
+      </form>
     </div>
   );
 };
 
-export default withAuth(AddRole); // Wrap AddRole with withAuth HOC
+export default withAuth(AddRole);

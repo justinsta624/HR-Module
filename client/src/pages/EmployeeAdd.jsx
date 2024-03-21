@@ -5,25 +5,28 @@ import Auth from '../utils/auth';
 import withAuth from '../components/Auth';
 
 const AddEmployee = () => {
-  const [employees, setEmployee] = useState({
-    first_name: '',
-    last_name: '',
-    email: '',
-    salary: '',
-    is_manager: '',
-    role_id: '',
-  });
-
+  const [employees, setEmployee] = useState([]);
+  const [roles, setRoles] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
     if (!Auth.loggedIn()) {
       navigate('/');
     }
+
+    axios.get('/api/roles')
+      .then(response => {
+        setRoles(response.data);
+      })
+      .catch(error => {
+        console.error('Error fetching roles:', error);
+      });
   }, [navigate]);
 
   const handleChange = (e) => {
-    setEmployee((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    const { name, value, type, checked } = e.target;
+    const newValue = type === 'checkbox' ? checked : value;
+    setEmployee((prev) => ({ ...prev, [name]: newValue }));
   };
 
   const handleClick = async (e) => {
@@ -37,87 +40,88 @@ const AddEmployee = () => {
   };
 
   return (
-    <div className='d-flex justify-content-center align-items-center mt-3'>
-      <div className='p-3 rounded w-50 border'>
-        <h3 className='text-center'>Add Employee</h3>
-        <form className='row g-1'>
-          <div className='col-12'>
-            <label htmlFor='inputName' className='form-label'> First Name</label>
+    <div className='container col-md-6 mt-3'>
+      <h2 className='text-center'>Add Employee</h2>
+      <form>
+        <div className='mb-3 mt-3'>
+          <label className='form-label'>First Name:</label>
+          <input
+            type='text'
+            className='form-control'
+            id='first_name'
+            placeholder='Enter First Name'
+            onChange={handleChange}
+            name='first_name'
+          />
+        </div>
+        <div className='mb-3 mt-3'>
+          <label className='form-label'>Last Name:</label>
+          <input
+            type='text'
+            className='form-control'
+            id='last_name'
+            placeholder='Enter Last Name'
+            onChange={handleChange}
+            name='last_name'
+          />
+        </div>
+        <div className='mb-3 mt-3'>
+          <label className='form-label'>Email:</label>
+          <input
+            type='email'
+            className='form-control'
+            id='email'
+            placeholder='Enter Email'
+            autoComplete='off'
+            onChange={handleChange}
+            name='email'
+          />
+        </div>
+        <div className='mb-3 mt-3'>
+          <label className='form-label'>Role Title:</label>
+          <select
+            className='form-select'
+            id='role_id'
+            onChange={handleChange}
+            name='role_id'
+            value={employees.role_id}
+          >
+            <option value='' disabled selected>Select Role</option>
+            {roles.map((role) => (
+              <option key={role.id} value={role.id}>{role.title}</option>
+            ))}
+          </select>
+        </div>
+        <div className='mb-3 mt-3'>
+          <label className='form-label'>Salary:</label>
+          <input
+            type='number'
+            className='form-control'
+            id='salary'
+            placeholder='Enter Salary'
+            autoComplete='off'
+            onChange={handleChange}
+            name='salary'
+          />
+        </div>
+        <div className='mb-3 mt-3'>
+          <label className='form-label'>Manager:</label>
+          <div className="form-check">
             <input
-              type='text'
-              className='form-control rounded-0'
-              id='inputName'
-              placeholder='Enter First Name'
-              onChange={handleChange}
-              name='first_name'
-            />
-          </div>
-          <div className='col-12'>
-            <label htmlFor='inputName' className='form-label'>Last Name</label>
-            <input
-              type='text'
-              className='form-control rounded-0'
-              id='inputName'
-              placeholder='Enter Last Name'
-              onChange={handleChange}
-              name='last_name'
-            />
-          </div>
-          <div className='col-12'>
-            <label htmlFor='inputEmail4' className='form-label'>Email</label>
-            <input
-              type='email'
-              className='form-control rounded-0'
-              id='inputEmail4'
-              placeholder='Enter Email'
-              autoComplete='off'
-              onChange={handleChange}
-              name='email'
-            />
-          </div>
-          <div className='col-12'>
-            <label htmlFor='inputSalary' className='form-label'>Salary</label>
-            <input
-              type='number'
-              className='form-control rounded-0'
-              id='inputSalary'
-              placeholder='Enter Salary'
-              autoComplete='off'
-              onChange={handleChange}
-              name='salary'
-            />
-          </div>
-          <div className='col-12'>
-            <label htmlFor='inputManager' className='form-label'>Manager</label>
-            <input
-              type='text'
-              className='form-control rounded-0'
-              id='inputManager'
-              placeholder='Input 0 or 1'
-              autoComplete='off'
+              type='checkbox'
+              className='form-check-input'
+              id='is_manager'
               onChange={handleChange}
               name='is_manager'
+              checked={employees.is_manager}
             />
+            <label className='form-check-label' htmlFor='is_manager'>Yes</label>
           </div>
-          <div className='col-12'>
-            <label htmlFor='inputRole' className='form-label'>Role ID</label>
-            <input
-              type='number'
-              className='form-control rounded-0'
-              id='inputRole'
-              placeholder='Enter Role ID'
-              autoComplete='off'
-              onChange={handleChange}
-              name='role_id'
-            />
-          </div>
-          <div className='col-12'>
-            <button type='submit' className='btn btn-primary w-100' onClick={handleClick}>Add Employee</button>
-          </div>
-        </form>
-      </div>
+        </div>
+        <button type='submit' className='btn btn-primary' onClick={handleClick}>Add Employee</button>
+      </form>
     </div>
   );
 };
 
-export default withAuth(AddEmployee); // Wrap AddEmployee with withAuth HOC
+export default withAuth(AddEmployee);
