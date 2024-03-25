@@ -42,7 +42,7 @@ const AppNavbar = () => {
     <>
       <Navbar bg='dark' variant='dark' expand='md' collapseOnSelect>
         <Container fluid>
-          <Navbar.Brand as={Link} to='/' onClick={handleNavLinkClick}>
+          <Navbar.Brand>
             Employee Management System
           </Navbar.Brand>
           <Navbar.Toggle aria-controls='responsive-navbar-nav' />

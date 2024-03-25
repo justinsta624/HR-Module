@@ -4,9 +4,11 @@ import axios from 'axios';
 import Auth from '../utils/auth';
 import withAuth from '../components/Auth';
 import DeleteModal from '../components/DeleteModal';
+import { CSVLink } from "react-csv";
 
 function EmployeeList() {
   const [employees, setEmployees] = useState([]);
+  const [records, setRecords] = useState([]); 
   const [isLoading, setIsLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [deleteId, setDeleteId] = useState(null);
@@ -21,6 +23,7 @@ function EmployeeList() {
     axios.get('/api/employees')
       .then(response => {
         setEmployees(response.data);
+        setRecords(response.data);
         setIsLoading(false);
       })
       .catch(error => {
@@ -28,6 +31,15 @@ function EmployeeList() {
         setIsLoading(false);
       });
   }, [navigate]);
+
+  const Filter = (event) => {
+    setEmployees(records.filter(employee => 
+      employee.first_name.toLowerCase().includes(event.target.value) ||
+      employee.last_name.toLowerCase().includes(event.target.value) ||
+      employee.email.toLowerCase().includes(event.target.value) ||
+      employee.role.title.toLowerCase().includes(event.target.value)
+
+    ))}
 
   const handleDelete = (id) => {
     setDeleteId(id);
@@ -61,8 +73,15 @@ function EmployeeList() {
         <h2>Employee List</h2>
       </div>
       <Link to='add' className='btn btn-success'> Add Employee</Link>
-      <div className='mt-3 card'>
-        <table className='table'>
+      <CSVLink className='btn btn-dark' data={employees}>Export To CSV</CSVLink>
+      <div className='mt-3'>
+        <input 
+        type="text" 
+        className='form-control'
+        placeholder='Type to Search'
+        onChange={Filter}
+        /> 
+        <table className='table table-hover' >
           <thead>
             <tr>
               <th>Employee ID</th>

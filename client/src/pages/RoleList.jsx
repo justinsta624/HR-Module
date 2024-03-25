@@ -4,9 +4,11 @@ import axios from 'axios';
 import Auth from '../utils/auth';
 import withAuth from '../components/Auth';
 import DeleteModal from '../components/DeleteModal';
+import { CSVLink } from "react-csv";
 
 function RoleList() {
   const [roles, setRoles] = useState([]);
+  const [records, setRecords] = useState([]); 
   const [isLoading, setIsLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [deleteId, setDeleteId] = useState(null);
@@ -26,12 +28,20 @@ function RoleList() {
     try {
       const response = await axios.get('/api/roles');
       setRoles(response.data);
+      setRecords(response.data);  
       setIsLoading(false);
     } catch (error) {
       console.error('Error fetching roles:', error);
       setIsLoading(false);
     }
   };
+
+  const Filter = (event) => {
+    setRoles(records.filter(role => 
+      role.title.toLowerCase().includes(event.target.value) ||
+      role.department.name.toLowerCase().includes(event.target.value)
+
+    ))}
 
   const handleDelete = (id) => {
     setDeleteId(id);
@@ -111,8 +121,15 @@ function RoleList() {
         <h2>Roles List</h2>
       </div>
       <Link to='add' className='btn btn-success'> Add Role</Link>
-      <div className='mt-3 card'>
-        <table className='table'>
+      <CSVLink className='btn btn-dark' data={roles}>Export To CSV</CSVLink>
+      <div className='mt-3'>
+      <input 
+        type="text" 
+        className='form-control'
+        placeholder='Type to Search'
+        onChange={Filter}
+        /> 
+        <table className='table table-hover'>
           <thead>
             <tr>
               <th>Role ID</th>

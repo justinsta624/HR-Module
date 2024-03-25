@@ -6,11 +6,13 @@ import Auth from '../utils/auth';
 import withAuth from '../components/Auth';
 import DeleteModal from '../components/DeleteModal';
 import '../styles/Modal.css';
+import { CSVLink } from "react-csv";
 
 // Define the DepartmentList component to display the list of departments
 function DepartmentList() {
   // Define state variables using useState hook
   const [departments, setDepartments] = useState([]);
+  const [records, setRecords] = useState([]); 
   const [isLoading, setIsLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [deleteId, setDeleteId] = useState(null);
@@ -29,11 +31,18 @@ function DepartmentList() {
     getAllDepartments();
   }, [navigate]);
 
+  const Filter = (event) => {
+    setDepartments(records.filter(department => 
+      department.name.toLowerCase().includes(event.target.value)
+
+    ))}
+
   // Define a function to fetch all departments from the API
   const getAllDepartments = async () => {
     try {
       const response = await axios.get('/api/departments');
       setDepartments(response.data);
+      setRecords(response.data);
       setIsLoading(false);
     } catch (error) {
       console.error('Error fetching all departments:', error);
@@ -113,8 +122,15 @@ function DepartmentList() {
         <h2>Departments List</h2>
       </div>
       <Link to='add' className='btn btn-success'> Add Department</Link>
-      <div className='mt-3 card'>
-        <table className='table'>
+      <CSVLink className='btn btn-dark' data={departments}>Export To CSV</CSVLink>
+      <div className='mt-3'>
+      <input 
+        type="text" 
+        className='form-control'
+        placeholder='Type to Search'
+        onChange={Filter}
+        /> 
+        <table className='table table-hover'>
           <thead>
             <tr>
               <th>Department ID</th>
