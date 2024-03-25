@@ -52,7 +52,7 @@ const UpdateManager = () => {
   return (
     <div className='container col-md-6 mt-3'>
       <h2 className='text-center'>Edit Manager</h2>
-      <form>
+      <form className='form-card mt-3'>
         <div className='mb-3 mt-3'>
           <label className='form-label'> ID:</label>
           <input

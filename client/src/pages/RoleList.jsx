@@ -98,8 +98,10 @@ function RoleList() {
       <div className='d-flex justify-content-center'>
         <h2>Roles List</h2>
       </div>
-      <Link to='add' className='btn btn-success'> Add Role</Link>
-      <CSVLink className='btn btn-dark' data={roles}>Export To CSV</CSVLink>
+      <div className='d-flex justify-content-between'>
+        <Link to='add' className='btn btn-success'>Add Role</Link>
+        <CSVLink className='btn btn-dark' data={roles}>Export To CSV</CSVLink>
+      </div>
       <div className='mt-3 card'>
         <input
           type="text"
