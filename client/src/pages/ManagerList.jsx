@@ -8,7 +8,7 @@ import { CSVLink } from "react-csv";
 
 function ManagerList() {
   const [managers, setManagers] = useState([]);
-  const [records, setRecords] = useState([]); 
+  const [records, setRecords] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [deleteId, setDeleteId] = useState(null);
@@ -23,7 +23,7 @@ function ManagerList() {
     axios.get('/api/managers')
       .then(response => {
         setManagers(response.data);
-        setRecords(response.data);  
+        setRecords(response.data);
         setIsLoading(false);
       })
       .catch(error => {
@@ -33,13 +33,14 @@ function ManagerList() {
   }, [navigate]);
 
   const Filter = (event) => {
-    setManagers(records.filter(manager => 
+    setManagers(records.filter(manager =>
       manager.first_name.toLowerCase().includes(event.target.value) ||
       manager.last_name.toLowerCase().includes(event.target.value) ||
       manager.email.toLowerCase().includes(event.target.value) ||
       manager.role.title.toLowerCase().includes(event.target.value)
 
-    ))}
+    ))
+  }
 
   const handleDelete = (id) => {
     setDeleteId(id);
@@ -74,14 +75,14 @@ function ManagerList() {
       </div>
       <Link to='add' className='btn btn-success'> Add Manager</Link>
       <CSVLink className='btn btn-dark' data={managers}>Export To CSV</CSVLink>
-      <div className='mt-3'>
-      <input 
-        type="text" 
-        className='form-control'
-        placeholder='Type to Search'
-        onChange={Filter}
-        /> 
-        <table className='table table-hover'>
+      <div className='mt-3 card'>
+        <input
+          type="text"
+          className='form-control'
+          placeholder='Type to Search'
+          onChange={Filter}
+        />
+        <table className='table table-bordered table-hover'>
           <thead>
             <tr>
               <th>Manager ID</th>

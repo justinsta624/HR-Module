@@ -12,7 +12,7 @@ import { CSVLink } from "react-csv";
 function DepartmentList() {
   // Define state variables using useState hook
   const [departments, setDepartments] = useState([]);
-  const [records, setRecords] = useState([]); 
+  const [records, setRecords] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [deleteId, setDeleteId] = useState(null);
@@ -32,10 +32,11 @@ function DepartmentList() {
   }, [navigate]);
 
   const Filter = (event) => {
-    setDepartments(records.filter(department => 
+    setDepartments(records.filter(department =>
       department.name.toLowerCase().includes(event.target.value)
 
-    ))}
+    ))
+  }
 
   // Define a function to fetch all departments from the API
   const getAllDepartments = async () => {
@@ -123,14 +124,14 @@ function DepartmentList() {
       </div>
       <Link to='add' className='btn btn-success'> Add Department</Link>
       <CSVLink className='btn btn-dark' data={departments}>Export To CSV</CSVLink>
-      <div className='mt-3'>
-      <input 
-        type="text" 
-        className='form-control'
-        placeholder='Type to Search'
-        onChange={Filter}
-        /> 
-        <table className='table table-hover'>
+      <div className='mt-3 card'>
+        <input
+          type="text"
+          className='form-control'
+          placeholder='Type to Search'
+          onChange={Filter}
+        />
+        <table className='table table-bordered table-hover'>
           <thead>
             <tr>
               <th>Department ID</th>
