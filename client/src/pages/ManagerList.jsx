@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Auth from '../utils/auth';
 import withAuth from '../components/Auth';
+import DeleteModal from '../components/DeleteModal';
 
 function ManagerList() {
   const [managers, setManagers] = useState([]);
@@ -42,34 +43,12 @@ function ManagerList() {
       .catch(error => {
         console.error('Error deleting manager:', error);
         setShowModal(false);
-        window.alert('Failed to delete manager. Please try again later.');
+        // window.alert('Failed to delete manager. Please try again later.');
       });
   };
 
   const cancelDelete = () => {
     setShowModal(false);
-  };
-
-  const renderModal = () => {
-    return (
-      <div className="modal" style={{ display: showModal ? 'block' : 'none' }}>
-        <div className="modal-dialog">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title">Confirm Delete</h5>
-              <button type="button" className="btn-close" onClick={cancelDelete}></button>
-            </div>
-            <div className="modal-body">
-              Are you sure you want to delete this manager?
-            </div>
-            <div className="modal-footer">
-              <button type="button" className="btn btn-secondary" onClick={cancelDelete}>Cancel</button>
-              <button type="button" className="btn btn-danger" onClick={confirmDelete}>Delete</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
   };
 
   if (isLoading) {
@@ -82,11 +61,11 @@ function ManagerList() {
         <h2>Manager List</h2>
       </div>
       <Link to='add' className='btn btn-success'> Add Manager</Link>
-      <div className='mt-3'>
+      <div className='mt-3 card'>
         <table className='table'>
           <thead>
             <tr>
-              <th>ID</th>
+              <th>Manager ID</th>
               <th>First Name</th>
               <th>Last Name</th>
               <th>Email</th>
@@ -111,7 +90,12 @@ function ManagerList() {
           </tbody>
         </table>
       </div>
-      {renderModal()}
+      <DeleteModal
+        showModal={showModal}
+        cancelDelete={cancelDelete}
+        confirmDelete={confirmDelete}
+        entityType="managers"
+      />
     </div>
   );
 }

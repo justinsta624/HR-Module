@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Auth from '../utils/auth';
 import withAuth from '../components/Auth';
+import DeleteModal from '../components/DeleteModal';
 
 function EmployeeList() {
   const [employees, setEmployees] = useState([]);
@@ -42,34 +43,12 @@ function EmployeeList() {
       .catch(error => {
         console.error('Error deleting employee:', error);
         setShowModal(false);
-        window.alert('Failed to delete employee. Please try again later.');
+        // window.alert('Failed to delete employee. Please try again later.');
       });
   };
 
   const cancelDelete = () => {
     setShowModal(false);
-  };
-
-  const renderModal = () => {
-    return (
-      <div className="modal" style={{ display: showModal ? 'block' : 'none' }}>
-        <div className="modal-dialog">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title">Confirm Delete</h5>
-              <button type="button" className="btn-close" onClick={cancelDelete}></button>
-            </div>
-            <div className="modal-body">
-              Are you sure you want to delete this employee?
-            </div>
-            <div className="modal-footer">
-              <button type="button" className="btn btn-secondary" onClick={cancelDelete}>Cancel</button>
-              <button type="button" className="btn btn-danger" onClick={confirmDelete}>Delete</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
   };
 
   if (isLoading) {
@@ -82,7 +61,7 @@ function EmployeeList() {
         <h2>Employee List</h2>
       </div>
       <Link to='add' className='btn btn-success'> Add Employee</Link>
-      <div className='mt-3'>
+      <div className='mt-3 card'>
         <table className='table'>
           <thead>
             <tr>
@@ -113,7 +92,12 @@ function EmployeeList() {
           </tbody>
         </table>
       </div>
-      {renderModal()}
+      <DeleteModal
+        showModal={showModal}
+        cancelDelete={cancelDelete}
+        confirmDelete={confirmDelete}
+        entityType="employees"
+      />
     </div>
   );
 }
