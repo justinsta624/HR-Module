@@ -8,7 +8,7 @@ import { CSVLink } from "react-csv";
 
 function RoleList() {
   const [roles, setRoles] = useState([]);
-  const [records, setRecords] = useState([]); 
+  const [records, setRecords] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [deleteId, setDeleteId] = useState(null);
@@ -28,7 +28,7 @@ function RoleList() {
     try {
       const response = await axios.get('/api/roles');
       setRoles(response.data);
-      setRecords(response.data);  
+      setRecords(response.data);
       setIsLoading(false);
     } catch (error) {
       console.error('Error fetching roles:', error);
@@ -37,11 +37,12 @@ function RoleList() {
   };
 
   const Filter = (event) => {
-    setRoles(records.filter(role => 
+    setRoles(records.filter(role =>
       role.title.toLowerCase().includes(event.target.value) ||
       role.department.name.toLowerCase().includes(event.target.value)
 
-    ))}
+    ))
+  }
 
   const handleDelete = (id) => {
     setDeleteId(id);
@@ -88,29 +89,6 @@ function RoleList() {
     }
   };
 
-  // const renderModal = () => {
-  //   return (
-  //     <div className="modal" style={{ display: showModal ? 'block' : 'none' }}>
-  //       <div className="modal-dialog">
-  //         <div className="modal-content">
-  //           <div className="modal-header">
-  //             <h5 className="modal-title">Confirm Delete</h5>
-  //             <button type="button" className="btn-close" onClick={cancelDelete}></button>
-  //           </div>
-  //           <div className="modal-body">
-  //             {errorMessage && <div className="alert alert-danger">{errorMessage}</div>}
-  //             {!errorMessage && 'Are you sure you want to delete this role?'}
-  //           </div>
-  //           <div className="modal-footer">
-  //             <button type="button" className="btn btn-secondary" onClick={cancelDelete}>Cancel</button>
-  //             <button type="button" className="btn btn-danger" onClick={confirmDelete} disabled={errorMessage && errorMessage.props.children[1].props.children.length > 0}>Delete</button>
-  //           </div>
-  //         </div>
-  //       </div>
-  //     </div>
-  //   );
-  // };
-
   if (isLoading) {
     return <h3 className='text-center m-3'>Loading...</h3>;
   }
@@ -122,14 +100,14 @@ function RoleList() {
       </div>
       <Link to='add' className='btn btn-success'> Add Role</Link>
       <CSVLink className='btn btn-dark' data={roles}>Export To CSV</CSVLink>
-      <div className='mt-3'>
-      <input 
-        type="text" 
-        className='form-control'
-        placeholder='Type to Search'
-        onChange={Filter}
-        /> 
-        <table className='table table-hover'>
+      <div className='mt-3 card'>
+        <input
+          type="text"
+          className='form-control'
+          placeholder='Type to Search'
+          onChange={Filter}
+        />
+        <table className='table table-bordered table-hover'>
           <thead>
             <tr>
               <th>Role ID</th>
@@ -159,7 +137,7 @@ function RoleList() {
         errorMessage={errorMessage}
         setErrorMessage={setErrorMessage}
         cancelDelete={cancelDelete}
-        confirmDelete={confirmDelete} 
+        confirmDelete={confirmDelete}
       />
     </div>
   );
