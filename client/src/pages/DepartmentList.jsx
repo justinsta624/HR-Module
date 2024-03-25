@@ -122,8 +122,10 @@ function DepartmentList() {
       <div className='d-flex justify-content-center'>
         <h2>Departments List</h2>
       </div>
-      <Link to='add' className='btn btn-success'> Add Department</Link>
-      <CSVLink className='btn btn-dark' data={departments}>Export To CSV</CSVLink>
+      <div className='d-flex justify-content-between'>
+        <Link to='add' className='btn btn-success'> Add Department</Link>
+        <CSVLink className='btn btn-dark' data={departments}>Export To CSV</CSVLink>
+      </div>
       <div className='mt-3 card'>
         <input
           type="text"

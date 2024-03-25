@@ -73,8 +73,10 @@ function EmployeeList() {
       <div className='d-flex justify-content-center'>
         <h2>Employee List</h2>
       </div>
-      <Link to='add' className='btn btn-success'> Add Employee</Link>
-      <CSVLink className='btn btn-dark' data={employees}>Export To CSV</CSVLink>
+      <div className='d-flex justify-content-between'>
+        <Link to='add' className='btn btn-success'>Add Employee</Link>
+        <CSVLink className='btn btn-dark' data={employees}>Export To CSV</CSVLink>
+      </div>
       <div className='mt-3 card'>
         <input
           type="text"
