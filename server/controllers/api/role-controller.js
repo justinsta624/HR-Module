@@ -3,11 +3,13 @@ const { Role, Employee, Department } = require('../../models');
 const withAuth = require('../../utils/auth');
 
 // GET all roles
-router.get('/', /*withAuth,*/ async (req, res) => {
+router.get('/', withAuth, async (req, res) => {
   try {
     const roleData = await Role.findAll(
       {
-        include: [{ model: Department, attributes: ['name'] }]
+        include: [
+          { model: Department, attributes: ['name'] }
+        ]
       }
     );
     res.status(200).json(roleData);
@@ -20,9 +22,11 @@ router.get('/', /*withAuth,*/ async (req, res) => {
 router.get('/:id', /*withAuth,*/ async (req, res) => {
   try {
     const roleData = await Role.findByPk(req.params.id,
-      // {
-      //   include: [{ model: Employee, attributes: ['first_name', 'last_name'] }]
-      // }
+      {
+        include: [
+          { model: Employee, attributes: ['first_name', 'last_name'] }
+        ]
+      }
     );
 
     if (!roleData) {
@@ -37,7 +41,7 @@ router.get('/:id', /*withAuth,*/ async (req, res) => {
 });
 
 // CREATE a role
-router.post('/', /*withAuth,*/ async (req, res) => {
+router.post('/', withAuth, async (req, res) => {
   try {
     const roleData = await Role.create(req.body);
     res.status(200).json(roleData);
@@ -47,7 +51,7 @@ router.post('/', /*withAuth,*/ async (req, res) => {
 });
 
 // UPDATE a role
-router.put('/:id', /*withAuth,*/ async (req, res) => {
+router.put('/:id', withAuth, async (req, res) => {
   try {
     const roleData = await Role.update(req.body, {
       where: {
@@ -67,7 +71,7 @@ router.put('/:id', /*withAuth,*/ async (req, res) => {
 });
 
 // DELETE a role
-router.delete('/:id', /*withAuth,*/ async (req, res) => {
+router.delete('/:id', withAuth, async (req, res) => {
   try {
     const roleData = await Role.destroy({
       where: {

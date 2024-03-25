@@ -53,14 +53,14 @@ const AppNavbar = () => {
                   <Nav.Link as={Link} to='/departments' onClick={handleNavLinkClick}>
                     Departments
                   </Nav.Link>
-                  <Nav.Link as={Link} to='/managers' onClick={handleNavLinkClick}>
-                    Managers
+                  <Nav.Link as={Link} to='/roles' onClick={handleNavLinkClick}>
+                    Roles
                   </Nav.Link>
                   <Nav.Link as={Link} to='/employees' onClick={handleNavLinkClick}>
                     Employees
                   </Nav.Link>
-                  <Nav.Link as={Link} to='/roles' onClick={handleNavLinkClick}>
-                    Roles
+                  <Nav.Link as={Link} to='/managers' onClick={handleNavLinkClick}>
+                    Managers
                   </Nav.Link>
                   <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
                 </>

@@ -1,0 +1,12 @@
+body {
+  background-color: #f9fbfd;
+}
+
+.card {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+  margin-bottom: 36px;
+}
+
+.table {
+  margin-bottom: 0px;
+}
