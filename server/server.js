@@ -39,6 +39,9 @@ app.use(session(sess));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Use the defined routes for the application
+app.use(routes);
+
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../client/dist')));
 
@@ -46,9 +49,6 @@ if (process.env.NODE_ENV === 'production') {
     res.sendFile(path.join(__dirname, '../client/dist/index.html'));
   });
 }
-
-// Use the defined routes for the application
-app.use(routes);
 
 // Synchronize the Sequelize models with the database and start the Express server
 sequelize.sync({ force: false }).then(() => {
