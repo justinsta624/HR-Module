@@ -246,14 +246,14 @@ export default defineConfig({
 
 
 ## Collaborators
-[![OzdalDogru](https://img.shields.io/badge/Ozdal-Dogru-blueviolet)](https://github.com/ozdaldogru)
-[![AustinGraham](https://img.shields.io/badge/Austin-Graham-red)](https://github.com/kyoriku)
-[![DanNadler](https://img.shields.io/badge/Dan-Nadler-green)](https://github.com/dannadlerp/)
-[![JustinLee](https://img.shields.io/badge/Justin-Lee-magenta)](https://github.com/justinsta624)
+[![OzdalDogru](https://img.shields.io/badge/Ozdal-Dogru-blueviolet.svg?style=for-the-badge&logo=DOGRU)](https://github.com/ozdaldogru)
+[![AustinGraham](https://img.shields.io/badge/Austin-Graham-red.svg?style=for-the-badge&logo=GRAHAM)](https://github.com/kyoriku)
+[![DanNadler](https://img.shields.io/badge/Dan-Nadler-green.svg?style=for-the-badge&logo=NADLER)](https://github.com/dannadlerp/)
+[![JustinLee](https://img.shields.io/badge/Justin-Lee-magenta.svg?style=for-the-badge&logo=LEE)](https://github.com/justinsta624)
 
 ## Presentation
 
-[Group 5 Presentation of Project: HR-Module](https://docs.google.com/presentation/d/1xnzeLJCSkiQqjjZmUebgKcdLThbfLlPm/edit?usp=sharing&ouid=107335282898826746758&rtpof=true&sd=true)
+[Group 5 Presentation of Project: HR-Module](https://docs.google.com/presentation/d/1ZLYdRFarGXJVZXaeoLB7-ziaqXrgrfQr/edit?usp=sharing&ouid=107335282898826746758&rtpof=true&sd=true)
 
 to address the following: 
 * `Elevator pitch` A one-minute description of your application.
@@ -268,7 +268,7 @@ to address the following:
 Followings are the outcomes of the project 3:
 
 * The URL of the deployed application. </br>
-[Deployed Application](https://drive.google.com/file/d/1DesRcjh71bOVOYdFWXmtrp2ilY5Ni-Oo/view) </br>
+[Deployed Application](https://gamersheim-67293fc106fb.herokuapp.com) </br>
 
 * The URL of the GitHub repository, with a unique name and a README describing the project </br>
 [Repository for this Project](https://github.com/ozdaldogru/HR-Module )
@@ -278,8 +278,8 @@ Followings are the outcomes of the project 3:
 
 For details click on the following link to go to the "LICENSE" file:
 
+[![License: ISC](https://img.shields.io/badge/License-ISC-blue.svg?style=for-the-badge&logo=isc)](https://opensource.org/licenses/ISC)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge&logo=mit)](https://opensource.org/licenses/MIT)
-[![License: ISC](https://img.shields.io/badge/License-ISC-blue.svg)](https://opensource.org/licenses/ISC)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
