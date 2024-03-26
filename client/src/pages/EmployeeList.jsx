@@ -85,7 +85,7 @@ function EmployeeList() {
           onChange={Filter}
         />
         <table className='table table-bordered table-hover'>
-          <thead>
+        <thead className='thead table-dark'>
             <tr>
               <th>Employee ID</th>
               <th>First Name</th>

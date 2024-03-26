@@ -5,8 +5,8 @@ import axios from 'axios';
 import Auth from '../utils/auth';
 import withAuth from '../components/Auth';
 import DeleteModal from '../components/DeleteModal';
-import '../styles/Modal.css';
 import { CSVLink } from "react-csv";
+import '../styles/Modal.css';
 
 // Define the DepartmentList component to display the list of departments
 function DepartmentList() {
@@ -124,7 +124,7 @@ function DepartmentList() {
       </div>
       <div className='d-flex justify-content-between'>
         <Link to='add' className='btn btn-success'> Add Department</Link>
-        <CSVLink className='btn btn-dark' data={departments}>Export To CSV</CSVLink>
+        <CSVLink className='btn btn-dark' data={departments} >Export To CSV</CSVLink>
       </div>
       <div className='mt-3 card'>
         <input
@@ -134,7 +134,7 @@ function DepartmentList() {
           onChange={Filter}
         />
         <table className='table table-bordered table-hover'>
-          <thead>
+          <thead className='thead table-dark'>
             <tr>
               <th>Department ID</th>
               <th>Department Name</th>

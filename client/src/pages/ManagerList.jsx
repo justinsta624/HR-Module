@@ -85,7 +85,7 @@ function ManagerList() {
           onChange={Filter}
         />
         <table className='table table-bordered table-hover'>
-          <thead>
+        <thead className='thead table-dark'>
             <tr>
               <th>Manager ID</th>
               <th>First Name</th>
