@@ -1,4 +1,4 @@
-const DeleteModal = ({ showModal, cancelDelete, confirmDelete, entityType, errorMessage }) => {
+const DeleteModal = ({ showModal, cancelDelete, confirmDelete, entityType, errorMessage, entityNameToDelete }) => {
   let entityName;
   switch (entityType) {
     case 'departments':
@@ -27,7 +27,20 @@ const DeleteModal = ({ showModal, cancelDelete, confirmDelete, entityType, error
           </div>
           <div className="modal-body">
             {errorMessage && <div className="alert alert-danger">{errorMessage}</div>}
-            {!errorMessage && `Are you sure you want to delete this ${entityName}?`}
+            {!errorMessage && (
+              <div>
+                <p>Are you sure you want to delete the following {entityName}?</p>
+                <ul>
+                  {Array.isArray(entityNameToDelete) ? (
+                    entityNameToDelete.map((item, index) => (
+                      <li key={index}>{item}</li>
+                    ))
+                  ) : (
+                    <li>{entityNameToDelete}</li>
+                  )}
+                </ul>
+              </div>
+            )}
           </div>
           <div className="modal-footer">
             <button type="button" className="btn btn-secondary" onClick={cancelDelete}>Cancel</button>
