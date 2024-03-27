@@ -110,7 +110,7 @@ function RoleList() {
           onChange={Filter}
         />
         <table className='table table-bordered table-hover'>
-          <thead>
+          <thead className='thead table-dark'>
             <tr>
               <th>Role ID</th>
               <th>Role Title</th>

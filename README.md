@@ -15,54 +15,42 @@
 [![GitHub Badge](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/justinsta624/)
 [![Heroku](https://img.shields.io/badge/heroku-%23430098.svg?style=for-the-badge&logo=heroku&logoColor=white)](https://dashboard.heroku.com/apps)
 
-
 </div>
 </div>
 
 ## Goal of the Project
-* Create the robust "Human Resources Module Application" helps to `communicate` `manage` `update` `change` to employment records in `Employee Management System`
+
+- Create the robust "Human Resources Module Application" helps to `communicate` `manage` `update` `change` to employment records in `Employee Management System`
 
 ### In General
-* Essential role of projects in the journey to becoming a full-stack web developer.
-* When Apply for development jobs, portfolio is absolutely vital to opening doors to opportunities, showcases high-quality deployed examples of work.
-* Fantastic opportunity to show employers your collaborative skills and coding abilities, especially in the context of a scalable, user-focused MERN application.
-* Employers seek evidence of both individual capabilities and collaboration with other developers.
-* Increased chances of interviews and job offers with a portfolio featuring deployed collaborative projects.
+
+- Essential role of projects in the journey to becoming a full-stack web developer.
+- When Apply for development jobs, portfolio is absolutely vital to opening doors to opportunities, showcases high-quality deployed examples of work.
+- Fantastic opportunity to show employers your collaborative skills and coding abilities, especially in the context of a scalable, user-focused MERN application.
+- Employers seek evidence of both individual capabilities and collaboration with other developers.
+- Increased chances of interviews and job offers with a portfolio featuring deployed collaborative projects.
 
 ### As a full-stack web developer
-* `CRUD Operations` </div>
+
+- `CRUD Operations` </div>
   Develop functionality to perform CRUD operations (Create, Read, Update, Delete) for departments, roles, managers and employees.
-* `Secure Authentication`
+- `Secure Authentication`
   </div> Implement JWT-based authentication to securely authenticate admin users.
-* `User Interface Design`
+- `User Interface Design`
   </div> Design an intuitive and user-friendly interface using React components for efficient navigation and interaction.
-* `Comprehensive Overview`
+- `Comprehensive Overview`
   </div> Provide a comprehensive overview of all departments, roles, and employees for easy access and management.
-* `Data Input/Data Modification`
+- `Data Input/Data Modification`
   </div> Allow administrators to input necessary details to create new entries for departments, roles, and employees in the database. Enable administrators to update employee roles or manager assignments to reflect accurate responsibilities and reporting structures.
-* `Error Handling`
+- `Error Handling`
   </div> Implement robust error handling mechanisms to gracefully handle errors and provide informative error messages to users when issues occur.
-  
+
 </div>
-</div>
-
-## Screenshots
-
-The following images show the web application's appearance and functionality:
-
-<img width="817" alt="Screenshot 2024-03-21 203706" src="https://github.com/justinsta624/readme/assets/143357899/a0266e5f-4d22-4a15-82c0-4b6c40589961">
-<img width="815" alt="Screenshot 2024-03-21 203725" src="https://github.com/justinsta624/readme/assets/143357899/a7086741-1942-443f-9a87-8107e0c252d7">
-<img width="822" alt="Screenshot 2024-03-21 203736" src="https://github.com/justinsta624/readme/assets/143357899/df1bed93-dddf-4e97-a34f-7077ef7769a8">
-<img width="940" alt="Screenshot 2024-03-21 203752" src="https://github.com/justinsta624/readme/assets/143357899/7da5366f-af6b-4561-a5b6-31f2515acc48">
-<img width="941" alt="Screenshot 2024-03-21 203807" src="https://github.com/justinsta624/readme/assets/143357899/1e03d8c1-a196-4561-8808-88049f10a6ba">
-<img width="952" alt="Screenshot 2024-03-21 203837" src="https://github.com/justinsta624/readme/assets/143357899/056b51f5-5863-48ec-8d1f-14f4ed53cd12">
-<img width="951" alt="Screenshot 2024-03-21 203856" src="https://github.com/justinsta624/readme/assets/143357899/e8e95c65-0935-429d-9529-8054819e080a">
 
 <div align="center">
 
 </div>
 </div>
-
 
 ## Table of Contents
 
@@ -71,6 +59,7 @@ The following images show the web application's appearance and functionality:
 - [User Story](#User-Story)
 - [Acceptance Criteria](#Acceptance-Criteria)
 - [Installation](#Installation)
+- [Screenshots](#screenshots)
 - [Tasks](#tasks)
 - [Technology Used](#technology-used)
 - [Reference](#Reference)
@@ -88,6 +77,7 @@ AS AN admin managing employee data
 I WANT to efficiently view, add, update, and delete departments, roles, and employees
 SO THAT I can maintain an organized and up-to-date employee management system
 ```
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Acceptance Criteria <a ID="acceptance-criteria"></a>
@@ -120,6 +110,7 @@ without the page reloading
 WHEN I perform actions like adding, updating, or deleting data
 THEN I receive confirmation dialogs to ensure intentional actions are taken
 ```
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Installation
@@ -127,54 +118,80 @@ THEN I receive confirmation dialogs to ensure intentional actions are taken
 Please follow these steps to install, refer to, contribute, or reflect our project in your work.
 
 1. Clone -or- Fork the repository
-2. Run the below in console install necessary packages
+2. Run the below in console install necessary packages for both Client (front-end) and Server (back-end) sides.
+
 ```
-npm i
+npm run install
 ```
+
 3. After NPM packages have been installed, you'll need to set up your MySQL database for the application to read and write to. Log into MySQL2:
+
 ```
 mysql -u root -p
 ```
-4. Within mysql2 - create the datbase with the schema provided, run the below command in the root folder (the below is the relative path):
+
+4. Within mysql2 - create the database with the schema provided, run the below command in the root folder (the below is the relative path):
+
 ```
 source ./db/schema.sql
 ```
+
 5. Exit MySQL2:
+
 ```
 quit
 ```
+
 6. Seeding -or- populating a database with necessary data
+
 ```
 npm run seed
 ```
+
 7. You can run start the server once packages have been installed and the database is created. Run the below in the CLI:
+
 ```
-node server.js
-npm run develop
+npm run start.js or npm run develop
 ```
 
 HR-Module is deployed VIA following link </div>
-<a href="https://gamersheim-67293fc106fb.herokuapp.com"> HEROKU </a>
+<a href="https://h-r-m-a459d9418603.herokuapp.com"> HEROKU </a>
+
+## Screenshots
+
+The following images show the web application's appearance and functionality:
+
+![alt text](./client/public/images/image-1.png)
+![alt text](./client/public/images/image-2.png)
+![alt text](./client/public/images/image-3.png)
+![alt text](./client/public/images/image-4.png)
+![alt text](./client/public/images/image-5.png)
+![alt text](./client/public/images/image-6.png)
+![alt text](./client/public/images/image-7.png)
+![alt text](./client/public/images/image-8.png)
+![alt text](./client/public/images/image-9.png)
+![alt text](./client/public/images/image-10.png)
 
 ## Tasks
 
 ### In General
-* Create a MERN stack single-page application that works with real-world data to solve a real-world challenge, with a focus on data and user demand.
-* Use React for the front end.
-* Use Node.js and Express.js server.
-* Use MySQL2 and the Sequelize for the database.
-* Use Axios for retrieving, adding, updating, and deleting data.
-* Be deployed using Heroku (with data).
-* Have a polished UI.
-* Be responsive & interactive (i.e., accept and respond to user input).
-* Include authentication (JWT).
-* Have a clean repository that meets quality coding standards (file structure, naming conventions, best practices for class and id naming conventions, indentation, high-quality comments, etc.).
-* Have a high-quality README (with unique name, description, technologies used, screenshot, and link to deployed application).
+
+- Create a MERN stack single-page application that works with real-world data to solve a real-world challenge, with a focus on data and user demand.
+- Use React for the front end.
+- Use Node.js and Express.js server.
+- Use MySQL2 and the Sequelize for the database.
+- Use Axios for retrieving, adding, updating, and deleting data.
+- Be deployed using Heroku (with data).
+- Have a polished UI.
+- Be responsive & interactive (i.e., accept and respond to user input).
+- Include authentication (JWT).
+- Have a clean repository that meets quality coding standards (file structure, naming conventions, best practices for class and id naming conventions, indentation, high-quality comments, etc.).
+- Have a high-quality README (with unique name, description, technologies used, screenshot, and link to deployed application).
 
 ### Vite for React: Steps to follow
 
-* To serve as a tool for quickly setting up and developing modern web applications, like React.
-* Focuses on providing a fast development experience by leveraging ES module imports, pre-bundling dependencies during development, and optimizing build times.
+- To serve as a tool for quickly setting up and developing modern web applications, like React.
+- Focuses on providing a fast development experience by leveraging ES module imports, pre-bundling dependencies during development, and optimizing build times.
 
 1. In the command line, navigate to the desired parent folder and run `npm create vite@latest`.
 2. Enter the desired name of new project folder.
@@ -186,6 +203,7 @@ HR-Module is deployed VIA following link </div>
 ### Further customization
 
 1. Navigate to `package.json` and modify the `scripts` object so that it looks like this example:
+
 ```json
   "scripts": {
     "dev": "vite",
@@ -197,14 +215,15 @@ HR-Module is deployed VIA following link </div>
 ```
 
 2. Navigate to the `vite.config.js` file and edit the export object so that it looks like this example:
+
 ```js
 export default defineConfig({
   plugins: [react()],
   server: {
     port: 3000,
-    open: true
-  }
-})
+    open: true,
+  },
+});
 ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -224,6 +243,7 @@ export default defineConfig({
 - **Heroku**: A cloud platform that offers easy deployment and management of web applications.
 
 ## Reference
+
 - [Node.js & Express.js to create a RESTful API](https://docs.github.com/en/rest?apiVersion=2022-11-28)
 - [Handlebars.js as the Template Engine](https://handlebarsjs.com/)
 - [MySQL Workbench for the Database](https://dev.mysql.com/doc/mysql-getting-started/en/)
@@ -244,8 +264,8 @@ export default defineConfig({
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
 ## Collaborators
+
 [![OzdalDogru](https://img.shields.io/badge/Ozdal-Dogru-blueviolet.svg?style=for-the-badge&logo=DOGRU)](https://github.com/ozdaldogru)
 [![AustinGraham](https://img.shields.io/badge/Austin-Graham-red.svg?style=for-the-badge&logo=GRAHAM)](https://github.com/kyoriku)
 [![DanNadler](https://img.shields.io/badge/Dan-Nadler-green.svg?style=for-the-badge&logo=NADLER)](https://github.com/dannadlerp/)
@@ -255,24 +275,23 @@ export default defineConfig({
 
 [Group 5 Presentation of Project: HR-Module](https://docs.google.com/presentation/d/1ZLYdRFarGXJVZXaeoLB7-ziaqXrgrfQr/edit?usp=sharing&ouid=107335282898826746758&rtpof=true&sd=true)
 
-to address the following: 
-* `Elevator pitch` A one-minute description of your application.
-* `Concept` What is your `user story`? What was your motivation for development?
-* `Process` What were the `technologies` used? How were `tasks` and `roles` broken down and assigned? What `challenges` did you encounter? What were your `successes`?
-* `Demo`: Show your `application`
-* Directions for `future development`.
+to address the following:
 
+- `Elevator pitch` A one-minute description of your application.
+- `Concept` What is your `user story`? What was your motivation for development?
+- `Process` What were the `technologies` used? How were `tasks` and `roles` broken down and assigned? What `challenges` did you encounter? What were your `successes`?
+- `Demo`: Show your `application`
+- Directions for `future development`.
 
 ## Outcome
 
 Followings are the outcomes of the project 3:
 
-* The URL of the deployed application. </br>
-[Deployed Application](https://gamersheim-67293fc106fb.herokuapp.com) </br>
+- The URL of the deployed application on Heroku. </br>
+  [Deployed Application](https://h-r-m-a459d9418603.herokuapp.com) </br>
 
-* The URL of the GitHub repository, with a unique name and a README describing the project </br>
-[Repository for this Project](https://github.com/ozdaldogru/HR-Module )
-
+- The URL of the GitHub repository, with a unique name and a README describing the project </br>
+  [Repository for this Project](https://github.com/ozdaldogru/HR-Module)
 
 ## License
 
@@ -284,4 +303,5 @@ For details click on the following link to go to the "LICENSE" file:
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ---
+
 © 2024 "HR-Module" by `Project 3` `Group 5`. All Rights Reserved.
