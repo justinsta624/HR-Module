@@ -87,28 +87,24 @@ SO THAT I can maintain an organized and up-to-date employee management system
 ```md
 GIVEN an employee management system web application
 WHEN I log in as an admin
-THEN I am securely authenticated using JWT-based authentication
-WHEN I access the system
-THEN I am presented with options to view, add, update, and delete departments, roles, and employees
-WHEN I choose to view departments, roles, and employees
-THEN I am able to see a comprehensive overview of all departments, roles, and employees
-WHEN I view employees by manager or department
-THEN I can see the relevant employee information grouped accordingly
-WHEN I view the total department budget
-THEN I see the calculated budget based on employee salaries within each department
-WHEN I add a new department, role, or employee
+THEN I am securely authenticated using session-based authentication
+WHEN I access the employee management system
+THEN I am presented with options to view, add, update, and delete departments, roles, employees, and managers
+WHEN I choose to view departments, roles, employees, or managers
+THEN I am able to see a comprehensive overview of all departments, roles, employees, and managers
+WHEN I add a new department, role, employee, or manager
 THEN I am able to input the necessary details to create a new entry in the database
-WHEN I update employee roles or manager assignments
+WHEN I update employee or manager roles
 THEN I can modify relevant information to reflect accurate responsibilities and reporting structures
-WHEN I delete a department, role, or employee
+WHEN I perform actions like deleting data
+THEN I receive confirmation dialogs to ensure intentional actions are taken
+WHEN I delete a department, role, employee, or manager
 THEN I can efficiently remove the selected entry from the database
+WHEN I navigate through different views
+THEN I can move seamlessly between dashboard, add/edit forms, and other sections using routing
+without the page reloading
 WHEN I interact with the user interface
 THEN I find it intuitive and user-friendly, built using React components
-WHEN I navigate through different views
-THEN I can move seamlessly between dashboard, add employee form, and other sections using routing
-without the page reloading
-WHEN I perform actions like adding, updating, or deleting data
-THEN I receive confirmation dialogs to ensure intentional actions are taken
 ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
