@@ -108,6 +108,7 @@ function RoleList() {
           className='form-control'
           placeholder='Type to Search'
           onChange={Filter}
+          id='searchInput'
         />
         <table className='table table-bordered table-hover'>
           <thead className='thead table-dark'>
@@ -140,9 +141,10 @@ function RoleList() {
         setErrorMessage={setErrorMessage}
         cancelDelete={cancelDelete}
         confirmDelete={confirmDelete}
+        entityType='roles'
+        entityNameToDelete={roles.find(role => role.id === deleteId)?.title}
       />
     </div>
   );
 }
-
 export default withAuth(RoleList);

@@ -80,12 +80,13 @@ function EmployeeList() {
       <div className='mt-3 card'>
         <input
           type="text"
+          id='searchInput'
           className='form-control'
           placeholder='Type to Search'
           onChange={Filter}
         />
         <table className='table table-bordered table-hover'>
-        <thead className='thead table-dark'>
+          <thead className='thead table-dark'>
             <tr>
               <th>Employee ID</th>
               <th>First Name</th>
@@ -119,6 +120,11 @@ function EmployeeList() {
         cancelDelete={cancelDelete}
         confirmDelete={confirmDelete}
         entityType="employees"
+        entityNameToDelete={
+          deleteId && employees.find(employee => employee.id === deleteId)
+            ? `${employees.find(employee => employee.id === deleteId).first_name} ${employees.find(employee => employee.id === deleteId).last_name}`
+            : ""
+        }
       />
     </div>
   );

@@ -132,6 +132,7 @@ function DepartmentList() {
           className='form-control'
           placeholder='Type to Search'
           onChange={Filter}
+          id='searchInput'
         />
         <table className='table table-bordered table-hover'>
           <thead className='thead table-dark'>
@@ -162,6 +163,8 @@ function DepartmentList() {
         setErrorMessage={setErrorMessage}
         cancelDelete={cancelDelete}
         confirmDelete={confirmDelete}
+        entityType='departments'
+        entityNameToDelete={departments.find(department => department.id === deleteId)?.name}
       />
     </div>
   );
