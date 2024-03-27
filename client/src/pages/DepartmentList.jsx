@@ -85,7 +85,7 @@ function DepartmentList() {
         setShowModal(true);
         setErrorMessage(
           <div>
-            <p>{`Cannot delete ${department.name} department. Please remove associated roles first:`}</p>
+            <p>{`Cannot delete ${department.name} department. Please remove associated role(s) first:`}</p>
             <ul>
               {associatedRoles.map((role, index) => (
                 <li key={index}>{role}</li>
